@@ -12,6 +12,10 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
 
 ## Ek Açıklamalar
 
+- Tüm proje tek html dosyası içerisinde bitirilmelidir.
+- Proje dosyası içerisinde ek kütüphane veya çerçeve kullanılmadan js(ES6), css ve html kullanılarak geliştirme yapılmalıdır.
+- Verilen tasarımın birebir aynısı geliştirilmelidir.Tasarım bozulmadan yapılacak ek özellikler değerlendirmede hesaba katılır.
+
 ## Geliştirici Notları
 
 Buraya geliştirici projenin denenmesi için notlar ekleyebilir.
