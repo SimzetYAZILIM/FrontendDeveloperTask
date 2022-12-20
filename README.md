@@ -29,6 +29,7 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
 - Satırlar html dosyasında yer alan veritabanı objesindeki kayıtlara göre otomatik oluşacaktır.
 - Satırların innerHTML verisi o an domdaki list attribute ile eşleşen checklistten alacaktır.
 - Scroll konumuna göre ekranda gözüken checklistin navlist karşılığı background style anlık olarak değişmelidir.
+- Her satıra tıklandığında scroll ilgili checkliste kadar kaymalıdır.
 - "Yeni Liste" butonuna basıldığında gözükecek inputa yazılacak değerle aynı başlık değerine sahip checklist elementi inputun sağında yer alan butona basıldığında anda oluşturmalı ve scroll oluşan liste gözükecek şekilde kaymalıdır.
 
 ## Ek Açıklama
