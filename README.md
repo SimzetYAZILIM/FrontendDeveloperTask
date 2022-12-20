@@ -4,8 +4,6 @@
 
 Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak projedir. Geliştirici adayları bu projeyi klonlayıp geliştirip pull request atmaları gerekmektedir.
 
-![alt masaüstü](https://dev.simzet.com/todotask/images/Masaüstü.png)
-
 ## Minimum Beklenen Özellikler
 
 - Tüm proje tek html dosyası içerisinde bitirilmelidir.
@@ -32,11 +30,21 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
 - Scroll konumuna göre ekranda gözüken checklistin navlist karşılığı background style anlık olarak değişmelidir.
 - "Yeni Liste" butonuna basıldığında gözükecek inputa yazılacak değerle aynı başlık değerine sahip checklist elementi inputun sağında yer alan butona basıldığında anda oluşturmalı ve scroll oluşan liste gözükecek şekilde kaymalıdır.
 
-
 ## Ek Açıklama
  
  - Custom Element Kaynak : https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements
  - Verilen tasarımın birebir aynısı geliştirilmelidir.Temel tasarım yapısı bozulmadan yapılacak ek özellikler değerlendirmede hesaba katılır.
+
+## Örnek Proje Görselleri
+
+
+![alt masaüstü](https://dev.simzet.com/todotask/images/Masaüstü1.png)
+
+![alt masaüstü](https://dev.simzet.com/todotask/images/Mobilmenü.png)
+
+![alt masaüstü](https://dev.simzet.com/todotask/images/Mobil.png)
+
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://dev.simzet.com/todotask/images/screen-capture.webm)
 
 ## Geliştirici Notları
 
