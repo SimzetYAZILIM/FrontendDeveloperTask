@@ -40,11 +40,12 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
 
 ![alt masaüstü](https://dev.simzet.com/todotask/images/Masaüstü1.png)
 
-![alt masaüstü](https://dev.simzet.com/todotask/images/Mobilmenü.png)
+![alt mobil menü](https://dev.simzet.com/todotask/images/Mobilmenü.png)
 
-![alt masaüstü](https://dev.simzet.com/todotask/images/Mobil.png)
+![alt mobil](https://dev.simzet.com/todotask/images/Mobil.png)
 
-[![Watch the video]([https://i.imgur.com/vKb2F1B.png](https://dev.simzet.com/todotask/images/video.png))](https://dev.simzet.com/todotask/images/screen-capture.webm)
+[![Watch the video](https://dev.simzet.com/todotask/images/video.png)](https://dev.simzet.com/todotask/images/screen-capture.webm)
+
 
 ## Geliştirici Notları
 
