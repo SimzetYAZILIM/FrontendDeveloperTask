@@ -44,7 +44,7 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
 
 ![alt mobil](https://dev.simzet.com/todotask/images/Mobil.png)
 
-[![Watch the video](https://dev.simzet.com/todotask/images/video.png)](https://dev.simzet.com/todotask/images/screen-capture.webm)
+[![Watch the video](https://dev.simzet.com/todotask/images/videokapak.png)](https://dev.simzet.com/todotask/images/screen-capture.webm)
 
 
 ## Geliştirici Notları
