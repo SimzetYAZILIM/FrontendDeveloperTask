@@ -36,7 +36,6 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
  
  - Custom Element Kaynak : https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements
  - Verilen tasarımın birebir aynısı geliştirilmelidir.Temel tasarım yapısı bozulmadan yapılacak ek özellikler değerlendirmede hesaba katılır.
- - Proje Amacı
 
 ## Örnek Proje Görselleri
 
