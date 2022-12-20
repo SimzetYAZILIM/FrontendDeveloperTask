@@ -4,6 +4,8 @@
 
 Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak projedir. Geliştirici adayları bu projeyi klonlayıp geliştirip pull request atmaları gerekmektedir.
 
+![alt masaüstü](https://dev.simzet.com/todotask/images/Masaüstü.png)
+
 ## Minimum Beklenen Özellikler
 
 - Tüm proje tek html dosyası içerisinde bitirilmelidir.
