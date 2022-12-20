@@ -5,7 +5,6 @@
 Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak projedir. Geliştirici adayları bu projeyi klonlayıp geliştirip pull request atmaları gerekmektedir.
 
 ## Minimum Beklenen Özellikler
-
 - Tüm proje tek html dosyası içerisinde bitirilmelidir.
 - Proje dosyası içerisinde ek kütüphane veya çerçeve kullanılmadan js(ES6), css ve html kullanılarak geliştirme yapılmalıdır.
 - "CheckList Custom Elementi Özellikleri" başlığı altındaki özellikler uygun olarak bir checklist elementi geliştirilmelidir.
@@ -39,6 +38,7 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
 
 ## Örnek Proje Görselleri
 
+[![Watch the video](https://dev.simzet.com/todotask/images/videokapak.png)](https://dev.simzet.com/todotask/images/screen-capture.webm)
 
 ![alt masaüstü](https://dev.simzet.com/todotask/images/Masaüstü1.png)
 
@@ -46,7 +46,7 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
 
 ![alt mobil](https://dev.simzet.com/todotask/images/Mobil.png)
 
-[![Watch the video](https://dev.simzet.com/todotask/images/videokapak.png)](https://dev.simzet.com/todotask/images/screen-capture.webm)
+
 
 
 ## Geliştirici Notları
