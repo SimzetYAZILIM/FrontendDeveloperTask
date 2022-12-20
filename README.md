@@ -5,7 +5,7 @@
 Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak projedir. Geliştirici adayları bu projeyi klonlayıp geliştirip pull request atmaları gerekmektedir.
 
 ## Minimum Beklenen Özellikler
-- Tüm proje tek html dosyası içerisinde bitirilmelidir.
+- Tüm proje tek "TodoTask.html" dosyası içerisinde bitirilmelidir.
 - Proje dosyası içerisinde ek kütüphane veya çerçeve kullanılmadan js(ES6), css ve html kullanılarak geliştirme yapılmalıdır.
 - "CheckList Custom Elementi Özellikleri" başlığı altındaki özellikler uygun olarak bir checklist elementi geliştirilmelidir.
 - "NavList Custom Elementi Özellikleri" başlığı altındaki özellikler uygun olarak bir navlist elementi geliştirilmelidir.
