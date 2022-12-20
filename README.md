@@ -13,7 +13,8 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
 - Tasarım responsive şekilde kodlanmalıdır.
 
 ## CheckList Custom Elementi Özellikleri
-
+Örnek Kullanım : 	
+    ``` <check-list baslik="Yapılacaklar" list="yaplist" placeholder="İş Açıklaması..."></check-list> ```
 - Oluşacak satırların verisi html dosyasında yer alan veritabanı objesinden alınacaktır.
 - Placeholder attribute değeri yeni eklenen satırlardaki inputun placeholder değerine atacaktır.Placeholder attribute verilmeyen checklist elementlerinde varsayılan değer "Yazınız..." olacaktır.
 - Baslık attribute değeri checklistin içerisinde oluşacak <baslik></baslik> tagına yerleştirilecektir.
@@ -24,7 +25,8 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
 - Satırların sağında yer alan sil iconuna tıklandığında satır silinmelidir.
 
 ## NavList Custom Elementi Özellikleri
-
+Örnek Kullanım : 	
+    ``` <nav-list></nav-list> ```
 - Satırlar html dosyasında yer alan veritabanı objesindeki kayıtlara göre otomatik oluşacaktır.
 - Satırların innerHTML verisi o an domdaki list attribute ile eşleşen checklistten alacaktır.
 - Scroll konumuna göre ekranda gözüken checklistin navlist karşılığı background style anlık olarak değişmelidir.
@@ -34,6 +36,7 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
  
  - Custom Element Kaynak : https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements
  - Verilen tasarımın birebir aynısı geliştirilmelidir.Temel tasarım yapısı bozulmadan yapılacak ek özellikler değerlendirmede hesaba katılır.
+ - Proje Amacı
 
 ## Örnek Proje Görselleri
 
