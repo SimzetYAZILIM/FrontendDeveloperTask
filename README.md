@@ -7,8 +7,8 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
 ## Minimum Beklenen Özellikler
 - Tüm proje tek "TodoTask.html" dosyası içerisinde bitirilmelidir.
 - Proje dosyası içerisinde ek kütüphane veya çerçeve kullanılmadan js(ES6), css ve html kullanılarak geliştirme yapılmalıdır.
-- "CheckList Custom Elementi Özellikleri" başlığı altındaki özellikler uygun olarak bir checklist elementi geliştirilmelidir.
-- "NavList Custom Elementi Özellikleri" başlığı altındaki özellikler uygun olarak bir navlist elementi geliştirilmelidir.
+- "CheckList Custom Elementi Özellikleri" başlığı altındaki özelliklere uygun olarak bir checklist elementi geliştirilmelidir.
+- "NavList Custom Elementi Özellikleri" başlığı altındaki özelliklere uygun olarak bir navlist elementi geliştirilmelidir.
 - Tasarım responsive şekilde kodlanmalıdır.
 
 ## CheckList Custom Elementi Özellikleri
@@ -16,7 +16,7 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
     ``` <check-list baslik="Yapılacaklar" list="yaplist" placeholder="İş Açıklaması..."></check-list> ```
 - Oluşacak satırların verisi html dosyasında yer alan veritabanı objesinden alınacaktır.
 - Placeholder attribute değeri yeni eklenen satırlardaki inputun placeholder değerine atacaktır.Placeholder attribute verilmeyen checklist elementlerinde varsayılan değer "Yazınız..." olacaktır.
-- Baslık attribute değeri checklistin içerisinde oluşacak <baslik></baslik> tagına yerleştirilecektir.
+- Baslık attribute değeri checklistin içerisinde oluşacak baslik tagına yerleştirilecektir.
 - Baslıkta yer alan yazdır butonuna basıldığında sadece o checklist elementinin dolu satırları gözükecektir.(Boş satırlar gizli olmalıdır.)
 - Eklenen satırlarda input value değeri null ise solunda yer alan checkbox gizli olmalıdır.
 - Yapıldı işaretlenen satırlarda text alanının üstü çizili olmaldır.
