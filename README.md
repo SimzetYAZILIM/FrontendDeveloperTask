@@ -20,7 +20,7 @@ Bu proje Simzet Yazılım LTD.ŞTİ. ön uç geliştirici alımı için taslak p
 - Baslıkta yer alan yazdır butonuna basıldığında sadece o checklist elementinin dolu satırları gözükecektir.(Boş satırlar gizli olmalıdır.)
 - Eklenen satırlarda input value değeri null ise solunda yer alan checkbox gizli olmalıdır.
 - Yapıldı işaretlenen satırlarda text alanının üstü çizili olmaldır.
-- Yapıldı işaretlenen satırlarda text inputtaki değişiklik engellenmelidir.
+- Yapıldı işaretlenen satırlarda text input read only olmalıdır.
 - Satırların sağında yer alan sil iconuna tıklandığında satır silinmelidir.
 
 ## NavList Custom Elementi Özellikleri
