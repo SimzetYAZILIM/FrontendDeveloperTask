@@ -25,18 +25,37 @@
         header.setAttribute("class", "header");
 
         //   title
-        const baslik = header.appendChild(document.createElement("h3"));
+        const baslik = header.appendChild(document.createElement("p"));
         baslik.setAttribute("class", "baslik");
         baslik.textContent = this.hasAttribute("baslik")
           ? this.getAttribute("baslik")
           : "default baslik";
 
+        // //   button group
+        const buttonGroup = header.appendChild(document.createElement("div"));
+        buttonGroup.setAttribute("class", "button-group");
+
         //   add button
-        const addButton = header.appendChild(document.createElement("button"));
+        const addButton = buttonGroup.appendChild(
+          document.createElement("button")
+        );
         addButton.setAttribute("class", "add");
         const addIcon = addButton.appendChild(document.createElement("span"));
         addIcon.setAttribute("class", "material-symbols-outlined");
         addIcon.textContent = "add_circle";
+        addButton.addEventListener("click", addCheckItem);
+
+        //   print button
+        const printButton = buttonGroup.appendChild(
+          document.createElement("button")
+        );
+        printButton.setAttribute("class", "print");
+        const printIcon = printButton.appendChild(
+          document.createElement("span")
+        );
+        printIcon.setAttribute("class", "material-symbols-outlined");
+        printIcon.textContent = "print";
+        printButton.addEventListener("click", printCheckList);
 
         this.appendChild(wrapper);
       }
@@ -44,6 +63,14 @@
 
     // register component
     customElements.define("check-list", Checklist);
+
+    function addCheckItem(event) {
+      console.log("adding checklist item");
+    }
+
+    function printCheckList(event) {
+      console.log("printing");
+    }
 
     let veritabani = {
       yaplist: {
@@ -146,26 +173,37 @@
         width: 50%;
       }
 
-      .wrapper {
+      check-list .wrapper {
         display: flex;
         flex-direction: column;
       }
-      .header {
+      check-list .header {
         background-color: red;
         display: flex;
         justify-content: space-between;
         flex-grow: 1;
       }
 
-      .baslik {
+      check-list .baslik {
         background-color: aqua;
-        font-size: 10px;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: capitalize;
         flex-grow: 7;
       }
 
-      .add {
+      check-list .button-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      check-list .add,
+      check-list .print {
         border: none;
         background-color: transparent;
+      }
+      check-list .add:hover {
+        cursor: pointer;
       }
       .material-symbols-outlined {
         font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
