@@ -11,6 +11,93 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
   </head>
+  <script>
+    // web component
+    class Checklist extends HTMLElement {
+      // connect component
+      connectedCallback() {
+        // wrapper for entire checklist element
+        const wrapper = document.createElement("span");
+        wrapper.setAttribute("class", "wrapper");
+
+        //   header section
+        const header = wrapper.appendChild(document.createElement("header"));
+        header.setAttribute("class", "header");
+
+        //   title
+        const baslik = header.appendChild(document.createElement("h3"));
+        baslik.setAttribute("class", "baslik");
+        baslik.textContent = this.hasAttribute("baslik")
+          ? this.getAttribute("baslik")
+          : "default baslik";
+
+        //   add button
+        const addButton = header.appendChild(document.createElement("button"));
+        addButton.setAttribute("class", "add");
+        const addIcon = addButton.appendChild(document.createElement("span"));
+        addIcon.setAttribute("class", "material-symbols-outlined");
+        addIcon.textContent = "add_circle";
+
+        this.appendChild(wrapper);
+      }
+    }
+
+    // register component
+    customElements.define("check-list", Checklist);
+
+    let veritabani = {
+      yaplist: {
+        0: {
+          veri: "T�m proje tek html dosyas� i�erisinde bitirilmelidir.",
+          secim: true,
+        },
+        1: {
+          veri: "Ek k�t�phane veya �er�eve kullan�lmadan js(ES6), css ve html kullan�larak geli�tirme yap�lmal�d�r.",
+          secim: false,
+        },
+        2: {
+          veri: "Di�er Detaylar ��in L�tfen README.md dosyas�n� inceleyeniz.",
+          secim: true,
+        },
+      },
+      alisverislist: {
+        0: {
+          veri: "S�t",
+          secim: false,
+        },
+        1: {
+          veri: "Yo�urt",
+          secim: true,
+        },
+        2: {
+          veri: "Ekmek",
+          secim: false,
+        },
+        3: {
+          veri: "1 Kg So�an",
+          secim: false,
+        },
+        4: {
+          veri: "3 Kg Patates",
+          secim: false,
+        },
+      },
+      digerlist: {
+        0: {
+          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 1",
+          secim: true,
+        },
+        1: {
+          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 2",
+          secim: false,
+        },
+        2: {
+          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 3",
+          secim: false,
+        },
+      },
+    };
+  </script>
 
   <body>
     <style>
@@ -50,6 +137,39 @@
         align-items: center;
         overflow-y: scroll;
       }
+
+      .checklist-element {
+        width: 100px;
+        background-color: black;
+      }
+      check-list {
+        width: 50%;
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+      .header {
+        background-color: red;
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+      }
+
+      .baslik {
+        background-color: aqua;
+        font-size: 10px;
+        flex-grow: 7;
+      }
+
+      .add {
+        border: none;
+        background-color: transparent;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
     </style>
 
     <!--
@@ -73,7 +193,14 @@
 
       <div class="check-list">
         <h1>check list</h1>
-        <h1>check list</h1>
+        <hello-world></hello-world>
+        <popup-info
+          baslik="fake baslik"
+          img="img/alt.png"
+          data-text="Your card validation code (CVC)
+  is an extra security feature — it is the last 3 or 4 numbers on the
+  back of your card."
+        ></popup-info>
         <check-list
           baslik="Yap�lacaklar"
           list="yaplist"
@@ -96,59 +223,5 @@
 
 			-->
     </div>
-    <script>
-      let veritabani = {
-        yaplist: {
-          0: {
-            veri: "T�m proje tek html dosyas� i�erisinde bitirilmelidir.",
-            secim: true,
-          },
-          1: {
-            veri: "Ek k�t�phane veya �er�eve kullan�lmadan js(ES6), css ve html kullan�larak geli�tirme yap�lmal�d�r.",
-            secim: false,
-          },
-          2: {
-            veri: "Di�er Detaylar ��in L�tfen README.md dosyas�n� inceleyeniz.",
-            secim: true,
-          },
-        },
-        alisverislist: {
-          0: {
-            veri: "S�t",
-            secim: false,
-          },
-          1: {
-            veri: "Yo�urt",
-            secim: true,
-          },
-          2: {
-            veri: "Ekmek",
-            secim: false,
-          },
-          3: {
-            veri: "1 Kg So�an",
-            secim: false,
-          },
-          4: {
-            veri: "3 Kg Patates",
-            secim: false,
-          },
-        },
-        digerlist: {
-          0: {
-            veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 1",
-            secim: true,
-          },
-          1: {
-            veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 2",
-            secim: false,
-          },
-          2: {
-            veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 3",
-            secim: false,
-          },
-        },
-      };
-    </script>
   </body>
 </html>
