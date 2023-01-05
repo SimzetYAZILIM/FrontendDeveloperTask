@@ -1,107 +1,141 @@
 <html>
+  <head>
+    <title>Task App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+  </head>
 
-<head>
-	<title>Task App</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-</head>
+  <body>
+    <style>
+      :root {
+        --iconfont: "Material Symbols Outlined";
+        /* https://fonts.google.com/icons */
+      }
 
-<body>
-	<style>
-		:root {
-			--iconfont: 'Material Symbols Outlined';
-			/* https://fonts.google.com/icons */
-		}
+      * {
+        font-family: Inter, Arial, sans-serif;
+      }
 
-		* {
-			font-family: Inter, Arial, sans-serif;
-		}
-	</style>
+      .main-container {
+        width: 100%;
+        height: 100vh;
+        background-color: red;
+        display: flex;
+      }
 
-	<!--
+      .nav-list {
+        flex-basis: 30%;
+        background-color: orangered;
+      }
+      .check-list {
+        flex-basis: 70%;
+        background-color: yellow;
+      }
+    </style>
 
-		CheckList Custom Elementi Özellikleri
-		-Oluþacak satýrlarýn verisi veritabaný objesinden alýnacaktýr.
-		-Placeholder attribute deðeri yeni eklenen satýrlardaki inputun placeholder deðerine atacaktýr.Placeholder attribute verilmeyen checklist elementlerinde varsayýlan deðer "Yazýnýz..." olacaktýr.
-		-Baslýk attribute deðeri checklistin içerisinde oluþacak <baslik></baslik> tagýna yerleþtirilecektir.
-		-Baslýkta yer alan yazdýr butonuna basýldýðýnda sadece o checklist elementinin dolu satýrlarý gözükecektir.(Boþ satýrlar gizli olmalýdýr.)
-		-Eklenen satýrlarda input value deðeri null ise solunda yer alan checkbox gizli olmalýdýr.
-		-Yapýldý iþaretlenen satýrlarda text alanýnýn üstü çizili olmaldýr.
-		-Yapýldý iþaretlenen satýrlarda text alanýnda iþaret kaldýrýlana kadar deðiþiklik engellenmelidir.
-		-Satýrlarýn saðýnda yer alan sil iconuna týklandýðýnda satýr silinmelidir.
+    <!--
+
+		CheckList Custom Elementi ï¿½zellikleri
+		-Oluï¿½acak satï¿½rlarï¿½n verisi veritabanï¿½ objesinden alï¿½nacaktï¿½r.
+		-Placeholder attribute deï¿½eri yeni eklenen satï¿½rlardaki inputun placeholder deï¿½erine atacaktï¿½r.Placeholder attribute verilmeyen checklist elementlerinde varsayï¿½lan deï¿½er "Yazï¿½nï¿½z..." olacaktï¿½r.
+		-Baslï¿½k attribute deï¿½eri checklistin iï¿½erisinde oluï¿½acak <baslik></baslik> tagï¿½na yerleï¿½tirilecektir.
+		-Baslï¿½kta yer alan yazdï¿½r butonuna basï¿½ldï¿½ï¿½ï¿½nda sadece o checklist elementinin dolu satï¿½rlarï¿½ gï¿½zï¿½kecektir.(Boï¿½ satï¿½rlar gizli olmalï¿½dï¿½r.)
+		-Eklenen satï¿½rlarda input value deï¿½eri null ise solunda yer alan checkbox gizli olmalï¿½dï¿½r.
+		-Yapï¿½ldï¿½ iï¿½aretlenen satï¿½rlarda text alanï¿½nï¿½n ï¿½stï¿½ ï¿½izili olmaldï¿½r.
+		-Yapï¿½ldï¿½ iï¿½aretlenen satï¿½rlarda text alanï¿½nda iï¿½aret kaldï¿½rï¿½lana kadar deï¿½iï¿½iklik engellenmelidir.
+		-Satï¿½rlarï¿½n saï¿½ï¿½nda yer alan sil iconuna tï¿½klandï¿½ï¿½ï¿½nda satï¿½r silinmelidir.
 	-->
 
+    <div class="main-container">
+      <div class="nav-list">
+        <h2>navlist</h2>
+        <nav-list></nav-list>
+      </div>
 
-	<check-list baslik="Yapýlacaklar" list="yaplist" placeholder="Ýþ Açýklamasý..."></check-list>
-	<check-list baslik="Alýþveriþ Listem" list="alisverislist" placeholder="Ýþ Açýklamasý..."></check-list>
-	<check-list baslik="Diðer Ýþlerim" list="digerlist"></check-list>
+      <div class="check-list">
+        <h1>check list</h1>
+        <check-list
+          baslik="Yapï¿½lacaklar"
+          list="yaplist"
+          placeholder="ï¿½ï¿½ Aï¿½ï¿½klamasï¿½..."
+        ></check-list>
+        <check-list
+          baslik="Alï¿½ï¿½veriï¿½ Listem"
+          list="alisverislist"
+          placeholder="ï¿½ï¿½ Aï¿½ï¿½klamasï¿½..."
+        ></check-list>
+        <check-list baslik="Diï¿½er ï¿½ï¿½lerim" list="digerlist"></check-list>
+      </div>
 
-	<!--
-			NavList Custom Elementi Özellikleri
-			- Satýrlar html dosyasýnda yer alan veritabaný objesindeki kayýtlara göre otomatik oluþacaktýr.
-			- Satýrlarýn innerHTML verisi o an domdaki list attribute ile eþleþen checklistten alacaktýr.
-			- Scroll konumuna göre ekranda gözüken checklistin navlist karþýlýðý background style anlýk olarak deðiþmelidir.
-			- "Yeni Liste" butonuna basýldýðýnda gözükecek inputa yazýlacak deðerle ayný baþlýk deðerine sahip checklist elementi inputun saðýnda yer alan butona basýldýðýnda anda oluþturmalý ve scroll oluþan liste gözükecek þekilde kaymalýdýr.
+      <!--
+			NavList Custom Elementi ï¿½zellikleri
+			- Satï¿½rlar html dosyasï¿½nda yer alan veritabanï¿½ objesindeki kayï¿½tlara gï¿½re otomatik oluï¿½acaktï¿½r.
+			- Satï¿½rlarï¿½n innerHTML verisi o an domdaki list attribute ile eï¿½leï¿½en checklistten alacaktï¿½r.
+			- Scroll konumuna gï¿½re ekranda gï¿½zï¿½ken checklistin navlist karï¿½ï¿½lï¿½ï¿½ï¿½ background style anlï¿½k olarak deï¿½iï¿½melidir.
+			- "Yeni Liste" butonuna basï¿½ldï¿½ï¿½ï¿½nda gï¿½zï¿½kecek inputa yazï¿½lacak deï¿½erle aynï¿½ baï¿½lï¿½k deï¿½erine sahip checklist elementi inputun saï¿½ï¿½nda yer alan butona basï¿½ldï¿½ï¿½ï¿½nda anda oluï¿½turmalï¿½ ve scroll oluï¿½an liste gï¿½zï¿½kecek ï¿½ekilde kaymalï¿½dï¿½r.
 
 			-->
-	<nav-list></nav-list>
-
-	<script>
-		let veritabani = {
-			yaplist: {
-				0: {
-					veri: "Tüm proje tek html dosyasý içerisinde bitirilmelidir.",
-					secim: true
-				},
-				1: {
-					veri: "Ek kütüphane veya çerçeve kullanýlmadan js(ES6), css ve html kullanýlarak geliþtirme yapýlmalýdýr.",
-					secim: false
-				},
-				2: {
-					veri: "Diðer Detaylar Ýçin Lütfen README.md dosyasýný inceleyeniz.",
-					secim: true
-				}
-			},
-			alisverislist: {
-				0: {
-					veri: "Süt",
-					secim: false
-				},
-				1: {
-					veri: "Yoðurt",
-					secim: true
-				},
-				2: {
-					veri: "Ekmek",
-					secim: false
-				},
-				3: {
-					veri: "1 Kg Soðan",
-					secim: false
-				},
-				4: {
-					veri: "3 Kg Patates",
-					secim: false
-				}
-			},
-			digerlist: {
-				0: {
-					veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 1",
-					secim: true
-				},
-				1: {
-					veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 2",
-					secim: false
-				},
-				2: {
-					veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 3",
-					secim: false
-				}
-			}
-		}
-
-	</script>
-</body>
-
+    </div>
+    <script>
+      let veritabani = {
+        yaplist: {
+          0: {
+            veri: "Tï¿½m proje tek html dosyasï¿½ iï¿½erisinde bitirilmelidir.",
+            secim: true,
+          },
+          1: {
+            veri: "Ek kï¿½tï¿½phane veya ï¿½erï¿½eve kullanï¿½lmadan js(ES6), css ve html kullanï¿½larak geliï¿½tirme yapï¿½lmalï¿½dï¿½r.",
+            secim: false,
+          },
+          2: {
+            veri: "Diï¿½er Detaylar ï¿½ï¿½in Lï¿½tfen README.md dosyasï¿½nï¿½ inceleyeniz.",
+            secim: true,
+          },
+        },
+        alisverislist: {
+          0: {
+            veri: "Sï¿½t",
+            secim: false,
+          },
+          1: {
+            veri: "Yoï¿½urt",
+            secim: true,
+          },
+          2: {
+            veri: "Ekmek",
+            secim: false,
+          },
+          3: {
+            veri: "1 Kg Soï¿½an",
+            secim: false,
+          },
+          4: {
+            veri: "3 Kg Patates",
+            secim: false,
+          },
+        },
+        digerlist: {
+          0: {
+            veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 1",
+            secim: true,
+          },
+          1: {
+            veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 2",
+            secim: false,
+          },
+          2: {
+            veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 3",
+            secim: false,
+          },
+        },
+      };
+    </script>
+  </body>
 </html>
