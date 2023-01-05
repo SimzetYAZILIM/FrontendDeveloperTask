@@ -16,6 +16,8 @@
     class Checklist extends HTMLElement {
       // connect component
       connectedCallback() {
+        const listData = veritabani[this.getAttribute("list")];
+        console.log(listData);
         // wrapper for entire checklist element
         const wrapper = document.createElement("span");
         wrapper.setAttribute("class", "wrapper");
@@ -57,8 +59,23 @@
         printIcon.textContent = "print";
         printButton.addEventListener("click", printCheckList);
 
+        // list
+        const list = wrapper.appendChild(createElement(`<div><p>hi</p></div>`));
+        list.setAttribute("class", "list");
+
+        createElement(`<div><p>hi</p></div>`);
+
         this.appendChild(wrapper);
       }
+    }
+
+    function createElement(element) {
+      const content = new DOMParser().parseFromString(element, "text/html");
+      const bodyPart = content.body;
+      const fragmentElement = document.createDocumentFragment();
+      const tempElement = fragmentElement.appendChild(bodyPart);
+      console.log(tempElement);
+      return tempElement;
     }
 
     // register component
@@ -205,6 +222,12 @@
       check-list .add:hover {
         cursor: pointer;
       }
+      check-list .list {
+        background-color: blue;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+      }
       .material-symbols-outlined {
         font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
       }
@@ -231,14 +254,6 @@
 
       <div class="check-list">
         <h1>check list</h1>
-        <hello-world></hello-world>
-        <popup-info
-          baslik="fake baslik"
-          img="img/alt.png"
-          data-text="Your card validation code (CVC)
-  is an extra security feature — it is the last 3 or 4 numbers on the
-  back of your card."
-        ></popup-info>
         <check-list
           baslik="Yap�lacaklar"
           list="yaplist"
