@@ -16,12 +16,38 @@ d
     // web component
     class Checklist extends HTMLElement {
       _wrapper;
+      _list;
+
+      addToList() {
+        const inputGroup = htmlToElement(
+          `<div class="input-container">
+				<input class="list-input" placeholder="yaziniz"></input>
+			</div>
+			`
+        );
+
+        const deleteButton = inputGroup.appendChild(
+          htmlToElement(`
+		 	 <span class="material-symbols-outlined">
+				delete
+			</span>`)
+        );
+
+        console.log("input group", deleteButton);
+
+        deleteButton.addEventListener("click", deleteInput.bind(inputGroup));
+        this._list.appendChild(inputGroup);
+      }
 
       render() {
         const listTitle = this.getAttribute("list");
+        console.log("Rednering", veritabani[listTitle]);
 
         const target = document.querySelector(`#${listTitle}`);
         target.innerHTML = "";
+
+        // refrence list so we can append to it when adding new items
+        this._list = target;
 
         console.log(target);
 
@@ -129,7 +155,13 @@ d
     customElements.define("check-list", Checklist);
 
     function addCheckItem(event) {
-      console.log("adding checklist item", this);
+      this.addToList();
+      console.log("adding checklist item");
+    }
+
+    function deleteInput(e) {
+      this.innerHTML = "";
+      console.log("deleteing", this);
     }
 
     function printCheckList(event) {
@@ -284,6 +316,10 @@ d
       check-list .list-data {
         background-color: green;
         display: flex;
+      }
+
+      check-list .material-symbols-outlined:hover {
+        cursor: pointer;
       }
 
       .strike {
