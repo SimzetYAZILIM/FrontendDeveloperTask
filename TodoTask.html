@@ -62,13 +62,28 @@
           htmlToElement(`<ul class="list"></ul>`)
         );
 
-        // console.log(veritabani[this.getAttribute("list")]);
-
         for (const [key, value] of Object.entries(veritabani["yaplist"])) {
-          console.log(value.veri);
-          list.appendChild(
+          const listEntry = list.appendChild(
+            htmlToElement(`<div class="list-entry"></div>`)
+          );
+          const checkbox = listEntry.appendChild(
+            htmlToElement(`
+		  	<label>
+				<span class="checkmark"></span>
+			</label>
+		  `)
+          );
+
+          const checkboxInput = checkbox.appendChild(
+            htmlToElement(`
+			<input type="checkbox" checked="checked">
+			`)
+          );
+          checkboxInput.addEventListener("click", checkChange);
+
+          listEntry.appendChild(
             htmlToElement(
-              `<li class="item ${value.secim ? "" : "strike"}">${
+              `<li class="list-data ${value.secim ? "" : "strike"}">${
                 value.veri
               }</li>`
             )
@@ -82,6 +97,10 @@
       html = html.trim(); // Never return a text node of whitespace as the result
       template.innerHTML = html;
       return template.content.firstChild;
+    }
+
+    function checkChange(e) {
+      console.log("change", e.target.checked);
     }
 
     // register component
@@ -235,12 +254,17 @@
         flex-direction: column;
         row-gap: 10px;
       }
-      check-list .item {
+
+      check-list .list-entry {
+        display: flex;
+      }
+
+      check-list .list-data {
         background-color: green;
         display: flex;
       }
 
-      check-list .strike {
+      .strike {
         text-decoration: line-through;
       }
       .material-symbols-outlined {
