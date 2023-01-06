@@ -30,7 +30,7 @@ d
             `<input class="list-input" placeholder="yaziniz"></input>`
           )
         );
-        input.addEventListener("keydown", saveInput);
+        input.addEventListener("keydown", (e) => saveInput(e, this));
 
         const deleteButton = inputGroup.appendChild(
           htmlToElement(`
@@ -170,9 +170,14 @@ d
       console.log("deleteing", this);
     }
 
-    function saveInput(e) {
+    function saveInput(e, ref) {
       if (e.key === "Enter") {
-        console.log("saving");
+        const key = ref.getAttribute("list");
+        const innerKey = Object.entries(veritabani[key]);
+        const newInnerKey = innerKey[innerKey.length - 1];
+        veritabani[key][newInnerKey] = { veri: e.target.value, secim: true };
+        ref.render();
+        console.log("saving", e.target.value);
       }
     }
 
