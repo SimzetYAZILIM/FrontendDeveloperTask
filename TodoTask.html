@@ -19,45 +19,43 @@
         const listData = veritabani[this.getAttribute("list")];
         console.log(listData);
         // wrapper for entire checklist element
-        const wrapper = document.createElement("span");
-        wrapper.setAttribute("class", "wrapper");
-        this.appendChild(wrapper);
+        const wrapper = this.appendChild(
+          htmlToElement(`<span class="wrapper"></span>`)
+        );
 
         //   header section
-        const header = wrapper.appendChild(document.createElement("header"));
-        header.setAttribute("class", "header");
+        const header = wrapper.appendChild(
+          htmlToElement(`<header class="header"></header>`)
+        );
 
         //   title
-        const baslik = header.appendChild(document.createElement("p"));
-        baslik.setAttribute("class", "baslik");
+        const baslik = header.appendChild(
+          htmlToElement(`<p class="baslik"></p>`)
+        );
         baslik.textContent = this.hasAttribute("baslik")
           ? this.getAttribute("baslik")
           : "default baslik";
 
         // //   button group
-        const buttonGroup = header.appendChild(document.createElement("div"));
-        buttonGroup.setAttribute("class", "button-group");
+        const buttonGroup = header.appendChild(
+          htmlToElement(`<div class="button-group">
+			</div>`)
+        );
 
         //   add button
         const addButton = buttonGroup.appendChild(
-          document.createElement("button")
+          htmlToElement(`<button class="add">
+				<span class="material-symbols-outlined">add_circle</span>
+			</button>`)
         );
-        addButton.setAttribute("class", "add");
-        const addIcon = addButton.appendChild(document.createElement("span"));
-        addIcon.setAttribute("class", "material-symbols-outlined");
-        addIcon.textContent = "add_circle";
         addButton.addEventListener("click", addCheckItem);
 
         //   print button
         const printButton = buttonGroup.appendChild(
-          document.createElement("button")
+          htmlToElement(`<button class="print">
+				<span class="material-symbols-outlined">print</span>
+			</button>`)
         );
-        printButton.setAttribute("class", "print");
-        const printIcon = printButton.appendChild(
-          document.createElement("span")
-        );
-        printIcon.setAttribute("class", "material-symbols-outlined");
-        printIcon.textContent = "print";
         printButton.addEventListener("click", printCheckList);
 
         // list
@@ -221,7 +219,8 @@
         border: none;
         background-color: transparent;
       }
-      check-list .add:hover {
+      check-list .add:hover,
+      check-list .print:hover {
         cursor: pointer;
       }
       check-list .list {
