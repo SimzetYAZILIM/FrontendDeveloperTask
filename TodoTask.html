@@ -21,6 +21,7 @@
         // wrapper for entire checklist element
         const wrapper = document.createElement("span");
         wrapper.setAttribute("class", "wrapper");
+        this.appendChild(wrapper);
 
         //   header section
         const header = wrapper.appendChild(document.createElement("header"));
@@ -60,22 +61,23 @@
         printButton.addEventListener("click", printCheckList);
 
         // list
-        const list = wrapper.appendChild(createElement(`<div><p>hi</p></div>`));
-        list.setAttribute("class", "list");
+        // createElement(wrapper, `<div class="list"><p>hi</p></div>`);
+        // const list = wrapper.querySelector(".list");
+        // const listItem = createElement(list, `<p>item</p>`);
+        // console.log(listItem);
+        const list = wrapper.appendChild(
+          htmlToElement(`<div class="list"><p>hi</p></div>`)
+        );
 
-        createElement(`<div><p>hi</p></div>`);
-
-        this.appendChild(wrapper);
+        list.appendChild(htmlToElement(`<p>item</p>`));
       }
     }
 
-    function createElement(element) {
-      const content = new DOMParser().parseFromString(element, "text/html");
-      const bodyPart = content.body;
-      const fragmentElement = document.createDocumentFragment();
-      const tempElement = fragmentElement.appendChild(bodyPart);
-      console.log(tempElement);
-      return tempElement;
+    function htmlToElement(html) {
+      var template = document.createElement("template");
+      html = html.trim(); // Never return a text node of whitespace as the result
+      template.innerHTML = html;
+      return template.content.firstChild;
     }
 
     // register component
