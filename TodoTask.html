@@ -21,10 +21,16 @@ d
       addToList() {
         const inputGroup = htmlToElement(
           `<div class="input-container">
-				<input class="list-input" placeholder="yaziniz"></input>
 			</div>
 			`
         );
+
+        const input = inputGroup.appendChild(
+          htmlToElement(
+            `<input class="list-input" placeholder="yaziniz"></input>`
+          )
+        );
+        input.addEventListener("keydown", saveInput);
 
         const deleteButton = inputGroup.appendChild(
           htmlToElement(`
@@ -162,6 +168,12 @@ d
     function deleteInput(e) {
       this.innerHTML = "";
       console.log("deleteing", this);
+    }
+
+    function saveInput(e) {
+      if (e.key === "Enter") {
+        console.log("saving");
+      }
     }
 
     function printCheckList(event) {
