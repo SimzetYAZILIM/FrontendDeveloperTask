@@ -1,3 +1,4 @@
+d
 <html>
   <head>
     <title>Task App</title>
@@ -14,14 +15,60 @@
   <script>
     // web component
     class Checklist extends HTMLElement {
+      _wrapper;
+
+      render() {
+        const listTitle = this.getAttribute("list");
+
+        const target = document.querySelector(`#${listTitle}`);
+        target.innerHTML = "";
+
+        console.log(target);
+
+        for (const [key, value] of Object.entries(veritabani[listTitle])) {
+          const listEntry = target.appendChild(
+            htmlToElement(`<div class="list-entry"></div>`)
+          );
+          const checkbox = listEntry.appendChild(
+            htmlToElement(`
+        	<label>
+      		<span class="checkmark"></span>
+      	</label>
+        `)
+          );
+
+          const checkboxInput = checkbox.appendChild(
+            value.secim
+              ? htmlToElement(`
+      	<input type="checkbox" unchecked>
+      	`)
+              : htmlToElement(`
+      	<input type="checkbox" checked="checked">
+      	`)
+          );
+          checkboxInput.addEventListener("click", (e) => {
+            checkChange(e, this, listTitle, key);
+          });
+
+          listEntry.appendChild(
+            htmlToElement(
+              `<li class="list-data ${value.secim ? "" : "strike"}">${
+                value.veri
+              }</li>`
+            )
+          );
+        }
+
+        this._wrapper.appendChild(list);
+      }
       // connect component
       connectedCallback() {
-        const listData = veritabani[this.getAttribute("list")];
-        console.log(listData);
         // wrapper for entire checklist element
         const wrapper = this.appendChild(
           htmlToElement(`<span class="wrapper"></span>`)
         );
+
+        this._wrapper = wrapper;
 
         //   header section
         const header = wrapper.appendChild(
@@ -39,63 +86,31 @@
         // //   button group
         const buttonGroup = header.appendChild(
           htmlToElement(`<div class="button-group">
-    	</div>`)
+      	</div>`)
         );
 
         //   add button
         const addButton = buttonGroup.appendChild(
           htmlToElement(`<button class="add">
-    		<span class="material-symbols-outlined">add_circle</span>
-    	</button>`)
+      		<span class="material-symbols-outlined">add_circle</span>
+      	</button>`)
         );
         addButton.addEventListener("click", addCheckItem);
 
         //   print button
         const printButton = buttonGroup.appendChild(
           htmlToElement(`<button class="print">
-    		<span class="material-symbols-outlined">print</span>
-    	</button>`)
+      		<span class="material-symbols-outlined">print</span>
+      	</button>`)
         );
         printButton.addEventListener("click", printCheckList);
 
-        const list = wrapper.appendChild(
-          htmlToElement(`<ul class="list"></ul>`)
-        );
-
         const listTitle = this.getAttribute("list");
-        for (const [key, value] of Object.entries(veritabani[listTitle])) {
-          const listEntry = list.appendChild(
-            htmlToElement(`<div class="list-entry"></div>`)
-          );
-          const checkbox = listEntry.appendChild(
-            htmlToElement(`
-      	<label>
-    		<span class="checkmark"></span>
-    	</label>
-      `)
-          );
+        const list = htmlToElement(`<ul class="list" id=${listTitle}></ul>`);
 
-          const checkboxInput = checkbox.appendChild(
-            value.secim
-              ? htmlToElement(`
-    	<input type="checkbox" unchecked>
-    	`)
-              : htmlToElement(`
-    	<input type="checkbox" checked="checked">
-    	`)
-          );
-          checkboxInput.addEventListener("click", (e) => {
-            checkChange(e, veritabani, listTitle, key);
-          });
+        wrapper.appendChild(list);
 
-          listEntry.appendChild(
-            htmlToElement(
-              `<li class="list-data ${value.secim ? "" : "strike"}">${
-                value.veri
-              }</li>`
-            )
-          );
-        }
+        this.render();
       }
     }
 
@@ -106,9 +121,10 @@
       return template.content.firstChild;
     }
 
-    function checkChange(e, db, outerKey, innerKey) {
-      db[outerKey][innerKey].secim = !db[outerKey][innerKey].secim;
-      console.log(db);
+    function checkChange(e, ref, outerKey, innerKey) {
+      veritabani[outerKey][innerKey].secim =
+        !veritabani[outerKey][innerKey].secim;
+      ref.render();
     }
 
     // register component
