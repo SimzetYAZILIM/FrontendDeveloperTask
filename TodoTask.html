@@ -1,4 +1,3 @@
-d
 <html>
   <head>
     <title>Task App</title>
@@ -11,235 +10,6 @@ d
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-  </head>
-  <script>
-    // web component
-    class Checklist extends HTMLElement {
-      _wrapper;
-      _list;
-
-      addToList() {
-        const inputGroup = htmlToElement(
-          `<div class="input-container">
-			</div>
-			`
-        );
-
-        const input = inputGroup.appendChild(
-          htmlToElement(
-            `<input class="list-input" placeholder="yaziniz"></input>`
-          )
-        );
-        input.addEventListener("keydown", (e) => saveInput(e, this));
-
-        const deleteButton = inputGroup.appendChild(
-          htmlToElement(`
-		 	 <span class="material-symbols-outlined">
-				delete
-			</span>`)
-        );
-
-        console.log("input group", deleteButton);
-
-        deleteButton.addEventListener("click", deleteInput.bind(inputGroup));
-        this._list.appendChild(inputGroup);
-      }
-
-      render() {
-        const listTitle = this.getAttribute("list");
-        console.log("Rednering", veritabani[listTitle]);
-
-        const target = document.querySelector(`#${listTitle}`);
-        target.innerHTML = "";
-
-        // refrence list so we can append to it when adding new items
-        this._list = target;
-
-        console.log(target);
-
-        for (const [key, value] of Object.entries(veritabani[listTitle])) {
-          const listEntry = target.appendChild(
-            htmlToElement(`<div class="list-entry"></div>`)
-          );
-          const checkbox = listEntry.appendChild(
-            htmlToElement(`
-        	<label>
-      		<span class="checkmark"></span>
-      	</label>
-        `)
-          );
-
-          const checkboxInput = checkbox.appendChild(
-            value.secim
-              ? htmlToElement(`
-      	<input type="checkbox" unchecked>
-      	`)
-              : htmlToElement(`
-      	<input type="checkbox" checked="checked">
-      	`)
-          );
-          checkboxInput.addEventListener("click", (e) => {
-            checkChange(e, this, listTitle, key);
-          });
-
-          listEntry.appendChild(
-            htmlToElement(
-              `<li class="list-data ${value.secim ? "" : "strike"}">${
-                value.veri
-              }</li>`
-            )
-          );
-        }
-      }
-      // connect component
-      connectedCallback() {
-        // wrapper for entire checklist element
-        const wrapper = this.appendChild(
-          htmlToElement(`<span class="wrapper"></span>`)
-        );
-
-        this._wrapper = wrapper;
-
-        //   header section
-        const header = wrapper.appendChild(
-          htmlToElement(`<header class="header"></header>`)
-        );
-
-        //   title
-        const baslik = header.appendChild(
-          htmlToElement(`<p class="baslik"></p>`)
-        );
-        baslik.textContent = this.hasAttribute("baslik")
-          ? this.getAttribute("baslik")
-          : "default baslik";
-
-        // //   button group
-        const buttonGroup = header.appendChild(
-          htmlToElement(`<div class="button-group">
-      	</div>`)
-        );
-
-        //   add button
-        const addButton = buttonGroup.appendChild(
-          htmlToElement(`<button class="add">
-      		<span class="material-symbols-outlined">add_circle</span>
-      	</button>`)
-        );
-        addButton.addEventListener("click", addCheckItem.bind(this));
-
-        //   print button
-        const printButton = buttonGroup.appendChild(
-          htmlToElement(`<button class="print">
-      		<span class="material-symbols-outlined">print</span>
-      	</button>`)
-        );
-        printButton.addEventListener("click", printCheckList);
-
-        const listTitle = this.getAttribute("list");
-        const list = htmlToElement(`<ul class="list" id=${listTitle}></ul>`);
-
-        wrapper.appendChild(list);
-
-        this.render();
-      }
-    }
-
-    function htmlToElement(html) {
-      var template = document.createElement("template");
-      html = html.trim(); // Never return a text node of whitespace as the result
-      template.innerHTML = html;
-      return template.content.firstChild;
-    }
-
-    function checkChange(e, ref, outerKey, innerKey) {
-      veritabani[outerKey][innerKey].secim =
-        !veritabani[outerKey][innerKey].secim;
-      ref.render();
-    }
-
-    // register component
-    customElements.define("check-list", Checklist);
-
-    function addCheckItem(event) {
-      this.addToList();
-      console.log("adding checklist item");
-    }
-
-    function deleteInput(e) {
-      this.innerHTML = "";
-      console.log("deleteing", this);
-    }
-
-    function saveInput(e, ref) {
-      if (e.key === "Enter") {
-        const key = ref.getAttribute("list");
-        const innerKey = Object.entries(veritabani[key]);
-        const newInnerKey = innerKey[innerKey.length - 1];
-        veritabani[key][newInnerKey] = { veri: e.target.value, secim: true };
-        ref.render();
-        console.log("saving", e.target.value);
-      }
-    }
-
-    function printCheckList(event) {
-      console.log("printing");
-    }
-
-    let veritabani = {
-      yaplist: {
-        0: {
-          veri: "T�m proje tek html dosyas� i�erisinde bitirilmelidir.",
-          secim: true,
-        },
-        1: {
-          veri: "Ek k�t�phane veya �er�eve kullan�lmadan js(ES6), css ve html kullan�larak geli�tirme yap�lmal�d�r.",
-          secim: false,
-        },
-        2: {
-          veri: "Di�er Detaylar ��in L�tfen README.md dosyas�n� inceleyeniz.",
-          secim: true,
-        },
-      },
-      alisverislist: {
-        0: {
-          veri: "S�t",
-          secim: false,
-        },
-        1: {
-          veri: "Yo�urt",
-          secim: true,
-        },
-        2: {
-          veri: "Ekmek",
-          secim: false,
-        },
-        3: {
-          veri: "1 Kg So�an",
-          secim: false,
-        },
-        4: {
-          veri: "3 Kg Patates",
-          secim: false,
-        },
-      },
-      digerlist: {
-        0: {
-          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 1",
-          secim: true,
-        },
-        1: {
-          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 2",
-          secim: false,
-        },
-        2: {
-          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 3",
-          secim: false,
-        },
-      },
-    };
-  </script>
-
-  <body>
     <style>
       :root {
         --iconfont: "Material Symbols Outlined";
@@ -346,7 +116,268 @@ d
         font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
       }
     </style>
+    <style type="text/css" media="print">
+      * {
+        visibility: hidden;
+        margin: 0;
+        padding: 0;
+      }
 
+      .print-this * {
+        visibility: visible;
+      }
+
+      .print-this .add,
+      .print-this .print {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+
+  <script>
+    // web component
+    class Checklist extends HTMLElement {
+      _wrapper;
+      _list;
+
+      addToList() {
+        const inputGroup = htmlToElement(
+          `<div class="input-container">
+    	</div>
+    	`
+        );
+
+        const input = inputGroup.appendChild(
+          htmlToElement(
+            `<input class="list-input" placeholder="yaziniz"></input>`
+          )
+        );
+        input.addEventListener("keydown", (e) => saveInput(e, this));
+
+        const deleteButton = inputGroup.appendChild(
+          htmlToElement(`
+     	 <span class="material-symbols-outlined">
+    		delete
+    	</span>`)
+        );
+
+        console.log("input group", deleteButton);
+
+        deleteButton.addEventListener("click", deleteInput.bind(inputGroup));
+        this._list.appendChild(inputGroup);
+      }
+
+      render() {
+        const listTitle = this.getAttribute("list");
+        console.log("Rednering", veritabani[listTitle]);
+
+        const target = document.querySelector(`#${listTitle}`);
+        target.innerHTML = "";
+
+        // refrence list so we can append to it when adding new items
+        this._list = target;
+
+        console.log(target);
+
+        for (const [key, value] of Object.entries(veritabani[listTitle])) {
+          const listEntry = target.appendChild(
+            htmlToElement(`<div class="list-entry"></div>`)
+          );
+          const checkbox = listEntry.appendChild(
+            htmlToElement(`
+          	<label>
+        		<span class="checkmark"></span>
+        	</label>
+          `)
+          );
+
+          const checkboxInput = checkbox.appendChild(
+            value.secim
+              ? htmlToElement(`
+        	<input type="checkbox" unchecked>
+        	`)
+              : htmlToElement(`
+        	<input type="checkbox" checked="checked">
+        	`)
+          );
+          checkboxInput.addEventListener("click", (e) => {
+            checkChange(e, this, listTitle, key);
+          });
+
+          listEntry.appendChild(
+            htmlToElement(
+              `<li class="list-data ${value.secim ? "" : "strike"}">${
+                value.veri
+              }</li>`
+            )
+          );
+        }
+      }
+      // connect component
+      connectedCallback() {
+        // wrapper for entire checklist element
+        const wrapper = this.appendChild(
+          htmlToElement(`<span class="wrapper"></span>`)
+        );
+
+        this._wrapper = wrapper;
+
+        //   header section
+        const header = wrapper.appendChild(
+          htmlToElement(`<header class="header"></header>`)
+        );
+
+        //   title
+        const baslik = header.appendChild(
+          htmlToElement(`<p class="baslik"></p>`)
+        );
+        baslik.textContent = this.hasAttribute("baslik")
+          ? this.getAttribute("baslik")
+          : "default baslik";
+
+        // //   button group
+        const buttonGroup = header.appendChild(
+          htmlToElement(`<div class="button-group">
+        	</div>`)
+        );
+
+        //   add button
+        const addButton = buttonGroup.appendChild(
+          htmlToElement(`<button class="add">
+        		<span class="material-symbols-outlined">add_circle</span>
+        	</button>`)
+        );
+        addButton.addEventListener("click", addCheckItem.bind(this));
+
+        //   print button
+        const printButton = buttonGroup.appendChild(
+          htmlToElement(`<button class="print">
+        		<span class="material-symbols-outlined">print</span>
+        	</button>`)
+        );
+        printButton.addEventListener("click", (e) =>
+          printCheckList(e, this._wrapper)
+        );
+
+        const listTitle = this.getAttribute("list");
+        const list = htmlToElement(`<ul class="list" id=${listTitle}></ul>`);
+
+        wrapper.appendChild(list);
+
+        this.render();
+      }
+    }
+
+    function htmlToElement(html) {
+      var template = document.createElement("template");
+      html = html.trim(); // Never return a text node of whitespace as the result
+      template.innerHTML = html;
+      return template.content.firstChild;
+    }
+
+    function checkChange(e, ref, outerKey, innerKey) {
+      veritabani[outerKey][innerKey].secim =
+        !veritabani[outerKey][innerKey].secim;
+      ref.render();
+    }
+
+    // register component
+    customElements.define("check-list", Checklist);
+
+    function addCheckItem(event) {
+      this.addToList();
+      console.log("adding checklist item");
+    }
+
+    function deleteInput(e) {
+      this.innerHTML = "";
+      console.log("deleteing", this);
+    }
+
+    function saveInput(e, ref) {
+      if (e.key === "Enter") {
+        const key = ref.getAttribute("list");
+        const innerKey = Object.entries(veritabani[key]);
+        const newInnerKey = innerKey[innerKey.length - 1];
+        veritabani[key][newInnerKey] = { veri: e.target.value, secim: true };
+        ref.render();
+        console.log("saving", e.target.value);
+      }
+    }
+
+    function printCheckList(event, parent) {
+      parent.classList.add("print-this");
+      window.print();
+      console.log("printing", parent);
+      // const iframe = document.createElement("iframe");
+      // iframe.style.display = "none";
+      // document.body.appendChild(iframe);
+      // const pri = iframe.contentWindow;
+      // pri.document.open();
+      // pri.document.write(parent.innerHTML);
+      // pri.document.close();
+      // pri.focus();
+      // pri.print();
+      // pri.onafterprint = () => {
+      //   document.body.removeChild(iframe);
+      // };
+    }
+
+    let veritabani = {
+      yaplist: {
+        0: {
+          veri: "T�m proje tek html dosyas� i�erisinde bitirilmelidir.",
+          secim: true,
+        },
+        1: {
+          veri: "Ek k�t�phane veya �er�eve kullan�lmadan js(ES6), css ve html kullan�larak geli�tirme yap�lmal�d�r.",
+          secim: false,
+        },
+        2: {
+          veri: "Di�er Detaylar ��in L�tfen README.md dosyas�n� inceleyeniz.",
+          secim: true,
+        },
+      },
+      alisverislist: {
+        0: {
+          veri: "S�t",
+          secim: false,
+        },
+        1: {
+          veri: "Yo�urt",
+          secim: true,
+        },
+        2: {
+          veri: "Ekmek",
+          secim: false,
+        },
+        3: {
+          veri: "1 Kg So�an",
+          secim: false,
+        },
+        4: {
+          veri: "3 Kg Patates",
+          secim: false,
+        },
+      },
+      digerlist: {
+        0: {
+          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 1",
+          secim: true,
+        },
+        1: {
+          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 2",
+          secim: false,
+        },
+        2: {
+          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 3",
+          secim: false,
+        },
+      },
+    };
+  </script>
+
+  <body>
     <!--
 
 		CheckList Custom Elementi �zellikleri
@@ -359,7 +390,6 @@ d
 		-Yap�ld� i�aretlenen sat�rlarda text alan�nda i�aret kald�r�lana kadar de�i�iklik engellenmelidir.
 		-Sat�rlar�n sa��nda yer alan sil iconuna t�kland���nda sat�r silinmelidir.
 	-->
-
     <div class="main-container">
       <div class="nav-list">
         <h2>navlist</h2>
