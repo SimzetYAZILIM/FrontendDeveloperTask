@@ -173,6 +173,11 @@
         this.render();
       }
 
+      addCheckItem(event) {
+        this.addToList();
+        console.log("adding checklist item");
+      }
+
       render() {
         const listTitle = this.getAttribute("list");
         console.log("Rendering", veritabani[listTitle]);
@@ -253,7 +258,7 @@
         		<span class="material-symbols-outlined">add_circle</span>
         	</button>`)
         );
-        addButton.addEventListener("click", addCheckItem.bind(this));
+        addButton.addEventListener("click", (e) => this.addCheckItem());
 
         //   print button
         const printButton = buttonGroup.appendChild(
@@ -283,11 +288,6 @@
 
     // register component
     customElements.define("check-list", Checklist);
-
-    function addCheckItem(event) {
-      this.addToList();
-      console.log("adding checklist item");
-    }
 
     function deleteInput(e) {
       this.innerHTML = "";
