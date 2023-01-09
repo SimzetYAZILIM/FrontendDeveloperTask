@@ -194,6 +194,13 @@
         element.remove();
       }
 
+      printCheckList() {
+        this.classList.add("print-this");
+        window.print();
+        this.classList.remove("print-this");
+        console.log("printing", this);
+      }
+
       render() {
         const listTitle = this.getAttribute("list");
         console.log("Rendering", veritabani[listTitle]);
@@ -282,9 +289,7 @@
         		<span class="material-symbols-outlined">print</span>
         	</button>`)
         );
-        printButton.addEventListener("click", (e) =>
-          printCheckList(e, this._wrapper)
-        );
+        printButton.addEventListener("click", (e) => this.printCheckList());
 
         const listTitle = this.getAttribute("list");
         const list = htmlToElement(`<ul class="list" id=${listTitle}></ul>`);
@@ -314,12 +319,6 @@
         ref.render();
         console.log("saving", e.target.value);
       }
-    }
-
-    function printCheckList(event, parent) {
-      parent.classList.add("print-this");
-      window.print();
-      console.log("printing", parent);
     }
 
     let veritabani = {
