@@ -167,9 +167,15 @@
         this._list.appendChild(inputGroup);
       }
 
+      checkChange(e, outerKey, innerKey) {
+        veritabani[outerKey][innerKey].secim =
+          !veritabani[outerKey][innerKey].secim;
+        this.render();
+      }
+
       render() {
         const listTitle = this.getAttribute("list");
-        console.log("Rednering", veritabani[listTitle]);
+        console.log("Rendering", veritabani[listTitle]);
 
         const target = document.querySelector(`#${listTitle}`);
         target.innerHTML = "";
@@ -201,7 +207,7 @@
         	`)
           );
           checkboxInput.addEventListener("click", (e) => {
-            checkChange(e, this, listTitle, key);
+            this.checkChange(e, listTitle, key);
           });
 
           listEntry.appendChild(
@@ -273,12 +279,6 @@
       html = html.trim(); // Never return a text node of whitespace as the result
       template.innerHTML = html;
       return template.content.firstChild;
-    }
-
-    function checkChange(e, ref, outerKey, innerKey) {
-      veritabani[outerKey][innerKey].secim =
-        !veritabani[outerKey][innerKey].secim;
-      ref.render();
     }
 
     // register component
