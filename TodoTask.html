@@ -142,6 +142,36 @@
   </head>
 
   <script>
+    class NavList extends HTMLElement {
+      _wrapper;
+
+      render() {
+        this._wrapper.innerHTML = "";
+        const container = htmlToElement(`<div class="navlist"></div>`);
+        for (let list in veritabani) {
+          console.log(list);
+          container.appendChild(
+            htmlToElement(`<li class="nav-entry">${list}</div>`)
+          );
+        }
+
+        this._wrapper.appendChild(container);
+      }
+
+      connectedCallback() {
+        // wrapper for entire checklist element
+        const wrapper = this.appendChild(
+          htmlToElement(`<span class="navlist-wrapper"></span>`)
+        );
+
+        this._wrapper = wrapper;
+
+        this.render();
+      }
+    }
+    // register component
+    customElements.define("nav-list", NavList);
+
     // web component
     class Checklist extends HTMLElement {
       _wrapper;
