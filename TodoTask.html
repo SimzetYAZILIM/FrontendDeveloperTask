@@ -108,6 +108,13 @@
       check-list .material-symbols-outlined:hover {
         cursor: pointer;
       }
+      check-list .input-container {
+        display: flex;
+        flex-direction: column;
+      }
+      check-list .input-box {
+        display: flex;
+      }
 
       .strike {
         text-decoration: line-through;
@@ -139,22 +146,24 @@
     class Checklist extends HTMLElement {
       _wrapper;
       _list;
-
-      addToList() {
-        const inputGroup = htmlToElement(
-          `<div class="input-container">
+      _inputGroup = htmlToElement(
+        `<div class="input-container">
     	</div>
     	`
-        );
+      );
 
-        const input = inputGroup.appendChild(
+      addToList() {
+        const inputBox = this._inputGroup.appendChild(
+          htmlToElement(`<div class="input-box"></div>`)
+        );
+        const input = inputBox.appendChild(
           htmlToElement(
             `<input class="list-input" placeholder="yaziniz"></input>`
           )
         );
         input.addEventListener("keydown", (e) => saveInput(e, this));
 
-        const deleteButton = inputGroup.appendChild(
+        const deleteButton = inputBox.appendChild(
           htmlToElement(`
      	 <span class="material-symbols-outlined">
     		delete
@@ -163,8 +172,10 @@
 
         console.log("input group", deleteButton);
 
-        deleteButton.addEventListener("click", deleteInput.bind(inputGroup));
-        this._list.appendChild(inputGroup);
+        deleteButton.addEventListener("click", () =>
+          this.deleteInput(inputBox)
+        );
+        this._list.appendChild(inputBox);
       }
 
       checkChange(e, outerKey, innerKey) {
@@ -176,6 +187,11 @@
       addCheckItem(event) {
         this.addToList();
         console.log("adding checklist item");
+      }
+
+      deleteInput(element) {
+        console.log("deleteing", element);
+        element.remove();
       }
 
       render() {
@@ -288,11 +304,6 @@
 
     // register component
     customElements.define("check-list", Checklist);
-
-    function deleteInput(e) {
-      this.innerHTML = "";
-      console.log("deleteing", this);
-    }
 
     function saveInput(e, ref) {
       if (e.key === "Enter") {
