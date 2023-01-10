@@ -19,7 +19,10 @@
       * {
         font-family: Inter, Arial, sans-serif;
       }
-
+      html {
+        scroll-behavior: smooth;
+        overflow: hidden;
+      }
       .main-container {
         width: 100%;
         height: 100vh;
@@ -48,15 +51,12 @@
         overflow-y: scroll;
       }
 
-      .checklist-element {
-        width: 100px;
-        background-color: black;
-      }
       check-list {
         width: 50%;
       }
 
       check-list .wrapper {
+        height: 100vh;
         display: flex;
         flex-direction: column;
       }
@@ -64,7 +64,6 @@
         background-color: red;
         display: flex;
         justify-content: space-between;
-        flex-grow: 1;
       }
 
       check-list .baslik {
@@ -72,7 +71,6 @@
         font-size: 18px;
         font-weight: 600;
         text-transform: capitalize;
-        flex-grow: 7;
       }
 
       check-list .button-group {
@@ -136,6 +134,52 @@
         text-transform: capitalize;
       }
 
+      nav-list {
+        background-color: antiquewhite;
+        width: 90%;
+      }
+
+      nav-list .navlist {
+        width: 100%;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      nav-list .nav-entry {
+        padding: 10px 20px;
+        text-align: center;
+        border-radius: 10px;
+      }
+
+      nav-list a:hover {
+        cursor: pointer;
+        background-color: #888;
+      }
+
+      nav-list .nav-add {
+        width: 100%;
+        border: dotted 1px #888;
+        border-radius: 10px;
+
+        background-color: transparent;
+        width: 100%;
+      }
+
+      nav-list .nav-add:hover {
+        cursor: pointer;
+        background-color: #888;
+      }
+
+      nav-list .nav-add-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
       .strike {
         text-decoration: line-through;
       }
@@ -167,15 +211,31 @@
 
       render() {
         this._wrapper.innerHTML = "";
-        const container = htmlToElement(`<div class="navlist"></div>`);
+        const container = htmlToElement(`<nav class="navlist"></nav>`);
         for (let list in veritabani) {
           console.log(list);
           container.appendChild(
-            htmlToElement(`<li class="nav-entry">${list}</div>`)
+            htmlToElement(`<a class="nav-entry">${list}</div>`)
           );
         }
 
+        const addButton = htmlToElement(
+          `<button class="nav-add">
+            <span class="nav-add-content">
+              <span class="material-symbols-outlined">add_circle</span>
+              <p>Yeni list</p>
+            </span>
+            </button>`
+        );
+
+        addButton.addEventListener("click", this.addList);
+
         this._wrapper.appendChild(container);
+        this._wrapper.appendChild(addButton);
+      }
+
+      addList() {
+        console.log("adding");
       }
 
       connectedCallback() {
@@ -301,7 +361,9 @@
       connectedCallback() {
         // wrapper for entire checklist element
         const wrapper = this.appendChild(
-          htmlToElement(`<span class="wrapper"></span>`)
+          htmlToElement(
+            `<span id=${this.getAttribute("baslik")} class="wrapper"></span>`
+          )
         );
 
         this._wrapper = wrapper;
@@ -472,7 +534,6 @@
       </div>
 
       <div class="check-list">
-        <h1>check list</h1>
         <check-list
           baslik="Yap�lacaklar"
           list="yaplist"
@@ -485,7 +546,6 @@
         ></check-list>
         <check-list baslik="Di�er ��lerim" list="digerlist"></check-list>
       </div>
-      <img src="./ass"
       <!--
 			NavList Custom Elementi �zellikleri
 			- Sat�rlar html dosyas�nda yer alan veritaban� objesindeki kay�tlara g�re otomatik olu�acakt�r.
