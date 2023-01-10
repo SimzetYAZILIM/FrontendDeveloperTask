@@ -116,6 +116,26 @@
         display: flex;
       }
 
+      profile-element {
+        margin-top: 110px;
+        margin-bottom: 50px;
+      }
+
+      profile-element .profile-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      profile-element .profile-pic {
+        border: solid 2px transparent;
+        border-radius: 100%;
+        background-color: aliceblue;
+        padding: 10px;
+      }
+      profile-element .profile-name {
+        text-transform: capitalize;
+      }
+
       .strike {
         text-decoration: line-through;
       }
@@ -330,6 +350,33 @@
       }
     }
 
+    class ProfileElement extends HTMLElement {
+      constructor() {
+        super();
+      }
+      connectedCallback() {
+        const wrapper = this.appendChild(
+          htmlToElement(`<span class="profile-wrapper"></span>"`)
+        );
+        const profilePic = wrapper.appendChild(
+          htmlToElement(`
+          <div class="profile-pic">
+            <span class="material-symbols-outlined">
+              person
+            </span>
+          </div>`)
+        );
+
+        const profileName = wrapper.appendChild(
+          htmlToElement(
+            `<h3 class="profile-name">${this.getAttribute("name")}</h3>`
+          )
+        );
+      }
+    }
+
+    customElements.define("profile-element", ProfileElement);
+
     function htmlToElement(html) {
       var template = document.createElement("template");
       html = html.trim(); // Never return a text node of whitespace as the result
@@ -420,7 +467,7 @@
 	-->
     <div class="main-container">
       <div class="nav-list">
-        <h2>navlist</h2>
+        <profile-element name="hasan aga"></profile-element>
         <nav-list></nav-list>
       </div>
 
@@ -438,7 +485,7 @@
         ></check-list>
         <check-list baslik="Di�er ��lerim" list="digerlist"></check-list>
       </div>
-
+      <img src="./ass"
       <!--
 			NavList Custom Elementi �zellikleri
 			- Sat�rlar html dosyas�nda yer alan veritaban� objesindeki kay�tlara g�re otomatik olu�acakt�r.
