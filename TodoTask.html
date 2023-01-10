@@ -18,9 +18,9 @@
 
       * {
         font-family: Inter, Arial, sans-serif;
+        scroll-behavior: smooth;
       }
       html {
-        scroll-behavior: smooth;
         overflow: hidden;
       }
       .main-container {
@@ -56,6 +56,7 @@
       }
 
       check-list .wrapper {
+        scroll-margin: 100px;
         height: 100vh;
         display: flex;
         flex-direction: column;
@@ -215,7 +216,7 @@
         for (let list in veritabani) {
           console.log(list);
           container.appendChild(
-            htmlToElement(`<a class="nav-entry">${list}</div>`)
+            htmlToElement(`<a href=#${list} class="nav-entry">${list}</div>`)
           );
         }
 
@@ -370,7 +371,9 @@
 
         //   header section
         const header = wrapper.appendChild(
-          htmlToElement(`<header class="header"></header>`)
+          htmlToElement(
+            `<header id=${this.getAttribute("baslik")} class="header"></header>`
+          )
         );
 
         //   title
