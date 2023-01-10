@@ -70,7 +70,7 @@
 	left: 0;
 	background-color: rgb(240, 240, 240);
 	overflow-x: hidden;
-	padding-top: 2rem;
+	padding-top: 5rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -90,12 +90,21 @@
 
 	button:hover {
 	background-color: rgb(210, 210, 210);
+	cursor: pointer;
 	}
 
 	button.active {
 	background-color: rgb(210, 210, 210);
 	border-radius: 1rem;
 	transition: 0.5s;
+	}
+
+	span {
+		z-index: 9999;
+	}
+
+	span:hover {
+		cursor: pointer;
 	}
 
 	input.sidenav-button {
@@ -157,6 +166,7 @@
 		<div class="container" id="container">
 			<h2>Yapılacaklar</h2>
 			<span class="material-symbols-outlined yeni-liste">add_circle</span>
+			<span class="material-symbols-outlined yazdir" id="yazdir">print</span>
 		</div>
 	</section>
 
@@ -164,6 +174,7 @@
 		<div class="container" id="container">
 			<h2>Alışveriş Listem</h2>
 			<span class="material-symbols-outlined yeni-liste">add_circle</span>
+			<span class="material-symbols-outlined yazdir" id="yazdir">print</span>
 		</div>
 	</section>
 
@@ -171,6 +182,7 @@
 		<div class="container" id="container">
 			<h2>Diğer İşlerim</h2>
 			<span class="material-symbols-outlined yeni-liste">add_circle</span>
+			<span class="material-symbols-outlined yazdir" id="yazdir">print</span>
 		</div>
 	</section>
 </div>
@@ -347,6 +359,11 @@
 			addSpan.setAttribute('id', 'test');
 			addSpan.textContent = 'add_circle';
 
+			const printButton = document.createElement('span');
+			printButton.classList.add('material-symbols-outlined');
+			printButton.classList.add('yazdir');
+			printButton.textContent = 'print';
+
 			const newButton = document.createElement('input');
 			newButton.setAttribute('type', 'text');
 			newButton.setAttribute('placeholder', 'Yazınız...');
@@ -357,10 +374,11 @@
 
 			div.appendChild(h2);
 			div.appendChild(addSpan);
+			div.appendChild(printButton);
 			section.appendChild(div);
 			document.querySelector('.main').appendChild(section);
 		});
-
+		
 
 		const sections = document.querySelectorAll('section');
 		const buttonList = document.querySelectorAll('button');
@@ -377,6 +395,14 @@
 				}
 			}
 		};
+
+
+		const printSpan = document.getElementsByClassName('material-symbols-outlined yazdir');
+		for (let i = 0; i < printSpan.length; i++) {
+			printSpan[i].addEventListener('click', function () {
+				window.print();
+			});
+		}
 
 
 		let veritabani = {
