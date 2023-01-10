@@ -41,6 +41,8 @@
         overflow: hidden;
       }
       .check-list {
+        scroll-padding-top: 100px;
+
         flex-grow: 3;
         flex-shrink: 1;
         background-color: yellow;
@@ -56,7 +58,6 @@
       }
 
       check-list .wrapper {
-        scroll-margin: 100px;
         height: 100vh;
         display: flex;
         flex-direction: column;
@@ -371,9 +372,7 @@
 
         //   header section
         const header = wrapper.appendChild(
-          htmlToElement(
-            `<header id=${this.getAttribute("baslik")} class="header"></header>`
-          )
+          htmlToElement(`<header class="header"></header>`)
         );
 
         //   title
