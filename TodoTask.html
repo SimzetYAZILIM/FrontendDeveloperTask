@@ -332,7 +332,7 @@
             `<input class="list-input" placeholder="yaziniz"></input>`
           )
         );
-        input.addEventListener("keydown", (e) => saveInput(e, this));
+        input.addEventListener("keydown", this.saveInput.bind(this));
 
         const deleteButton = inputBox.appendChild(
           htmlToElement(`
@@ -370,6 +370,17 @@
         window.print();
         this.classList.remove("print-this");
         console.log("printing", this);
+      }
+
+      saveInput(e) {
+        if (e.key === "Enter") {
+          const key = this.getAttribute("list");
+          const innerKey = Object.entries(veritabani[key]);
+          const newInnerKey = innerKey[innerKey.length - 1];
+          veritabani[key][newInnerKey] = { veri: e.target.value, secim: true };
+          this.render();
+          console.log("saving", e.target.value);
+        }
       }
 
       render() {
@@ -472,6 +483,7 @@
         this.render();
       }
     }
+    customElements.define("check-list", Checklist);
 
     class ProfileElement extends HTMLElement {
       constructor() {
@@ -505,20 +517,6 @@
       html = html.trim(); // Never return a text node of whitespace as the result
       template.innerHTML = html;
       return template.content.firstChild;
-    }
-
-    // register component
-    customElements.define("check-list", Checklist);
-
-    function saveInput(e, ref) {
-      if (e.key === "Enter") {
-        const key = ref.getAttribute("list");
-        const innerKey = Object.entries(veritabani[key]);
-        const newInnerKey = innerKey[innerKey.length - 1];
-        veritabani[key][newInnerKey] = { veri: e.target.value, secim: true };
-        ref.render();
-        console.log("saving", e.target.value);
-      }
     }
 
     let veritabani = {
