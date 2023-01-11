@@ -269,22 +269,9 @@
       }
 
       addList() {
-        function addNewCheckList(baslik) {
-          veritabani[baslik] = {};
-          const checkListContainer = document.querySelector(".check-list");
-          checkListContainer.appendChild(
-            htmlToElement(` 
-              <check-list
-                baslik="${baslik} Listem"
-                list="${baslik}"
-                placeholder="�� A��klamas�..."
-              ></check-list>`)
-          );
-        }
-
         const inputGroup = htmlToElement(`
           <div class="input-group">
-            
+
           </div>`);
         const input = inputGroup.appendChild(
           htmlToElement(`
@@ -295,16 +282,32 @@
             <button>&#10004;</button>`)
         );
 
-        button.addEventListener("click", () => addNewCheckList(input.value));
+        button.addEventListener("click", () =>
+          this.addNewCheckList(input.value)
+        );
         input.addEventListener("keypress", (e) => {
           if (e.key === "Enter") {
             console.log(input.value);
-            addNewCheckList(input.value);
+            this.addNewCheckList(input.value);
           }
         });
         const addButton = document.querySelector(".nav-add");
         console.log(this._wrapper);
         this._wrapper.replaceChild(inputGroup, addButton);
+      }
+
+      addNewCheckList(baslik) {
+        veritabani[baslik] = {};
+        const checkListContainer = document.querySelector(".check-list");
+        checkListContainer.appendChild(
+          htmlToElement(`
+              <check-list
+                baslik="${baslik} Listem"
+                list="${baslik}"
+                placeholder="�� A��klamas�..."
+              ></check-list>`)
+        );
+        this.render();
       }
 
       connectedCallback() {
@@ -386,27 +389,31 @@
       }
 
       saveInput(e) {
-        if (e.key === "Enter") {
+        const input = e.target.value.trim();
+        if (e.key === "Enter" && input) {
           const key = this.getAttribute("list");
-          const innerKey = Object.entries(veritabani[key]);
-          const newInnerKey = innerKey[innerKey.length - 1];
-          veritabani[key][newInnerKey] = { veri: e.target.value, secim: true };
+          const keys = Object.entries(veritabani[key]);
+          const innerKey = keys.pop()[0] + 1;
+          console.log("inner key", innerKey);
+          veritabani[key][innerKey] = { veri: input, secim: true };
           this.render();
-          console.log("saving", e.target.value);
+          console.log("saving", input);
         }
       }
 
       render() {
         const listTitle = this.getAttribute("list");
-        console.log("Rendering", veritabani[listTitle]);
 
         const target = document.querySelector(`#${listTitle}`);
-        target.innerHTML = "";
-
         // refrence list so we can append to it when adding new items
         this._list = target;
+        if (Object.keys(veritabani[listTitle]).length) {
+          console.log("Rendering", veritabani[listTitle]);
 
-        console.log(target);
+          target.innerHTML = "";
+
+          console.log("target", target);
+        }
 
         for (const [key, value] of Object.entries(veritabani[listTitle])) {
           const listEntry = target.appendChild(
