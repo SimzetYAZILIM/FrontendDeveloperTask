@@ -394,7 +394,14 @@
         if (e.key === "Enter" && input) {
           const key = this.getAttribute("list");
           const keys = Object.entries(veritabani[key]);
-          const innerKey = keys ? keys.pop()[0] + 1 : 0;
+          if (keys.length === 0) {
+            // case empty checklist
+            // add input as first entry
+            veritabani[key] = { 0: { veri: input, secim: true } };
+            this.render();
+            return;
+          }
+          const innerKey = keys.pop()[0] + 1;
           console.log("inner key", innerKey);
           veritabani[key][innerKey] = { veri: input, secim: true };
           this.render();
@@ -405,15 +412,14 @@
       render() {
         const listTitle = this.getAttribute("list");
 
-        const target = document.querySelector(`#${listTitle}`);
+        const target = this._list;
         // refrence list so we can append to it when adding new items
+        console.log("target", target);
         this._list = target;
         if (Object.keys(veritabani[listTitle]).length) {
           console.log("Rendering", veritabani[listTitle]);
 
           target.innerHTML = "";
-
-          console.log("target", target);
         }
 
         for (const [key, value] of Object.entries(veritabani[listTitle])) {
@@ -497,7 +503,8 @@
         printButton.addEventListener("click", (e) => this.printCheckList());
 
         const listTitle = this.getAttribute("list");
-        const list = htmlToElement(`<ul class="list" id=${listTitle}></ul>`);
+        const list = htmlToElement(`<ul class="list"></ul>`);
+        this._list = list;
 
         wrapper.appendChild(list);
 
