@@ -262,14 +262,26 @@
             </button>`
         );
 
-        addButton.addEventListener("click", this.addList);
+        addButton.addEventListener("click", this.addList.bind(this));
 
         this._wrapper.appendChild(container);
         this._wrapper.appendChild(addButton);
       }
 
       addList() {
-        console.log("adding", this.parentNode);
+        function addNewCheckList(baslik) {
+          veritabani[baslik] = {};
+          const checkListContainer = document.querySelector(".check-list");
+          checkListContainer.appendChild(
+            htmlToElement(` 
+              <check-list
+                baslik="${baslik} Listem"
+                list="${baslik}"
+                placeholder="�� A��klamas�..."
+              ></check-list>`)
+          );
+        }
+
         const inputGroup = htmlToElement(`
           <div class="input-group">
             
@@ -283,15 +295,16 @@
             <button>&#10004;</button>`)
         );
 
-        button.addEventListener("click", () => console.log(input.value));
+        button.addEventListener("click", () => addNewCheckList(input.value));
         input.addEventListener("keypress", (e) => {
           if (e.key === "Enter") {
             console.log(input.value);
+            addNewCheckList(input.value);
           }
         });
-        this.parentNode.replaceChild(inputGroup, this);
-
-        console.log("input:", input);
+        const addButton = document.querySelector(".nav-add");
+        console.log(this._wrapper);
+        this._wrapper.replaceChild(inputGroup, addButton);
       }
 
       connectedCallback() {
