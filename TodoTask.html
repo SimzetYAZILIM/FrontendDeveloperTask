@@ -239,17 +239,23 @@
     </style>
   </head>
 
-  <script>
+  <script defer>
     class NavList extends HTMLElement {
       _wrapper;
 
       render() {
         this._wrapper.innerHTML = "";
+        const activeList = window.location.hash.slice(1);
         const container = htmlToElement(`<nav class="navlist"></nav>`);
         for (let list in veritabani) {
-          console.log(list);
+          console.log(`active? ${list}===${activeList}`);
+          console.log();
           container.appendChild(
-            htmlToElement(`<a href=#${list} class="nav-entry">${list}</div>`)
+            htmlToElement(
+              `<a href=#${list} class="nav-entry ${
+                activeList === list ? "active" : ""
+              }">${list}</div>`
+            )
           );
         }
 
@@ -546,6 +552,35 @@
       template.innerHTML = html;
       return template.content.firstChild;
     }
+
+    function observe() {
+      let options = {
+        root: document.querySelector(".check-list"),
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      let observer = new IntersectionObserver(observerCallback, options);
+      const targets = document.querySelectorAll("check-list");
+      console.log("observer target:", targets);
+
+      for (target of targets) {
+        observer.observe(target);
+      }
+    }
+
+    function observerCallback(entries, observer) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const targetListName = entry.target.getAttribute("list");
+          console.log(entry, targetListName);
+          window.location.hash = targetListName;
+        }
+      });
+    }
+    setTimeout(() => {
+      observe();
+    }, 200);
 
     let veritabani = {
       yaplist: {
