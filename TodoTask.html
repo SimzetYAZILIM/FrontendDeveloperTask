@@ -317,6 +317,36 @@
         newCheckList.scrollIntoView();
       }
 
+      observe() {
+        let options = {
+          root: document.querySelector(".check-list"),
+          rootMargin: "0px",
+          threshold: 0.1,
+        };
+
+        let observer = new IntersectionObserver(
+          this.observerCallback.bind(this),
+          options
+        );
+        const targets = document.querySelectorAll("check-list");
+        console.log("observer target:", targets);
+
+        for (let target of targets) {
+          observer.observe(target);
+        }
+      }
+
+      observerCallback(entries, observer) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const targetListName = entry.target.getAttribute("list");
+            console.log(entry, targetListName);
+            window.location.hash = targetListName;
+            this.render();
+          }
+        });
+      }
+
       connectedCallback() {
         // todo: put intersection observer here
         // whenever url intersection happens call render
@@ -331,6 +361,10 @@
         this._wrapper = wrapper;
 
         this.render();
+
+        setTimeout(() => {
+          this.observe();
+        }, 200);
       }
     }
     // register component
@@ -552,35 +586,6 @@
       template.innerHTML = html;
       return template.content.firstChild;
     }
-
-    function observe() {
-      let options = {
-        root: document.querySelector(".check-list"),
-        rootMargin: "0px",
-        threshold: 0.1,
-      };
-
-      let observer = new IntersectionObserver(observerCallback, options);
-      const targets = document.querySelectorAll("check-list");
-      console.log("observer target:", targets);
-
-      for (target of targets) {
-        observer.observe(target);
-      }
-    }
-
-    function observerCallback(entries, observer) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const targetListName = entry.target.getAttribute("list");
-          console.log(entry, targetListName);
-          window.location.hash = targetListName;
-        }
-      });
-    }
-    setTimeout(() => {
-      observe();
-    }, 200);
 
     let veritabani = {
       yaplist: {
