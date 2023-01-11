@@ -299,15 +299,16 @@
       addNewCheckList(baslik) {
         veritabani[baslik] = {};
         const checkListContainer = document.querySelector(".check-list");
-        checkListContainer.appendChild(
-          htmlToElement(`
+        const newCheckList = htmlToElement(`
               <check-list
                 baslik="${baslik} Listem"
                 list="${baslik}"
                 placeholder="�� A��klamas�..."
-              ></check-list>`)
-        );
+              ></check-list>`);
+        checkListContainer.appendChild(newCheckList);
+
         this.render();
+        newCheckList.scrollIntoView();
       }
 
       connectedCallback() {
@@ -393,7 +394,7 @@
         if (e.key === "Enter" && input) {
           const key = this.getAttribute("list");
           const keys = Object.entries(veritabani[key]);
-          const innerKey = keys.pop()[0] + 1;
+          const innerKey = keys ? keys.pop()[0] + 1 : 0;
           console.log("inner key", innerKey);
           veritabani[key][innerKey] = { veri: input, secim: true };
           this.render();
