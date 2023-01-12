@@ -1,107 +1,822 @@
 <html>
+  <head>
+    <title>Task App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <style>
+      :root {
+        --iconfont: "Material Symbols Outlined";
+        /* https://fonts.google.com/icons */
+      }
 
-<head>
-	<title>Task App</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-</head>
+      * {
+        font-family: Inter, Arial, sans-serif;
+        scroll-behavior: smooth;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        overflow: hidden;
+        padding: 0;
+      }
 
-<body>
-	<style>
-		:root {
-			--iconfont: 'Material Symbols Outlined';
-			/* https://fonts.google.com/icons */
-		}
+      .main-container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+      }
 
-		* {
-			font-family: Inter, Arial, sans-serif;
-		}
-	</style>
+      .nav-list {
+        background-color: #f8f8f8;
+        flex-grow: 1.5;
+        flex-shrink: 6;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .check-list {
+        scroll-padding-top: 100px;
 
-	<!--
+        flex-grow: 3;
+        flex-shrink: 1;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        overflow-y: scroll;
+      }
 
-		CheckList Custom Elementi Özellikleri
-		-Oluþacak satýrlarýn verisi veritabaný objesinden alýnacaktýr.
-		-Placeholder attribute deðeri yeni eklenen satýrlardaki inputun placeholder deðerine atacaktýr.Placeholder attribute verilmeyen checklist elementlerinde varsayýlan deðer "Yazýnýz..." olacaktýr.
-		-Baslýk attribute deðeri checklistin içerisinde oluþacak <baslik></baslik> tagýna yerleþtirilecektir.
-		-Baslýkta yer alan yazdýr butonuna basýldýðýnda sadece o checklist elementinin dolu satýrlarý gözükecektir.(Boþ satýrlar gizli olmalýdýr.)
-		-Eklenen satýrlarda input value deðeri null ise solunda yer alan checkbox gizli olmalýdýr.
-		-Yapýldý iþaretlenen satýrlarda text alanýnýn üstü çizili olmaldýr.
-		-Yapýldý iþaretlenen satýrlarda text alanýnda iþaret kaldýrýlana kadar deðiþiklik engellenmelidir.
-		-Satýrlarýn saðýnda yer alan sil iconuna týklandýðýnda satýr silinmelidir.
-	-->
+      check-list {
+        width: 50%;
+      }
 
+      check-list .wrapper {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      check-list .header {
+        margin-top: 80px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
 
-	<check-list baslik="Yapýlacaklar" list="yaplist" placeholder="Ýþ Açýklamasý..."></check-list>
-	<check-list baslik="Alýþveriþ Listem" list="alisverislist" placeholder="Ýþ Açýklamasý..."></check-list>
-	<check-list baslik="Diðer Ýþlerim" list="digerlist"></check-list>
+      check-list .baslik {
+        font-size: 24px;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
 
-	<!--
-			NavList Custom Elementi Özellikleri
-			- Satýrlar html dosyasýnda yer alan veritabaný objesindeki kayýtlara göre otomatik oluþacaktýr.
-			- Satýrlarýn innerHTML verisi o an domdaki list attribute ile eþleþen checklistten alacaktýr.
-			- Scroll konumuna göre ekranda gözüken checklistin navlist karþýlýðý background style anlýk olarak deðiþmelidir.
-			- "Yeni Liste" butonuna basýldýðýnda gözükecek inputa yazýlacak deðerle ayný baþlýk deðerine sahip checklist elementi inputun saðýnda yer alan butona basýldýðýnda anda oluþturmalý ve scroll oluþan liste gözükecek þekilde kaymalýdýr.
+      check-list .button-group {
+        display: flex;
+        gap: 10px;
+      }
 
-			-->
-	<nav-list></nav-list>
+      check-list .add,
+      check-list .print {
+        border: none;
+        background-color: transparent;
+      }
+      check-list .add:hover,
+      check-list .print:hover {
+        cursor: pointer;
+      }
+      check-list .list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+      }
 
-	<script>
-		let veritabani = {
-			yaplist: {
-				0: {
-					veri: "Tüm proje tek html dosyasý içerisinde bitirilmelidir.",
-					secim: true
-				},
-				1: {
-					veri: "Ek kütüphane veya çerçeve kullanýlmadan js(ES6), css ve html kullanýlarak geliþtirme yapýlmalýdýr.",
-					secim: false
-				},
-				2: {
-					veri: "Diðer Detaylar Ýçin Lütfen README.md dosyasýný inceleyeniz.",
-					secim: true
-				}
-			},
-			alisverislist: {
-				0: {
-					veri: "Süt",
-					secim: false
-				},
-				1: {
-					veri: "Yoðurt",
-					secim: true
-				},
-				2: {
-					veri: "Ekmek",
-					secim: false
-				},
-				3: {
-					veri: "1 Kg Soðan",
-					secim: false
-				},
-				4: {
-					veri: "3 Kg Patates",
-					secim: false
-				}
-			},
-			digerlist: {
-				0: {
-					veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 1",
-					secim: true
-				},
-				1: {
-					veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 2",
-					secim: false
-				},
-				2: {
-					veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 3",
-					secim: false
-				}
-			}
-		}
+      check-list .list-entry {
+        display: grid;
+        grid-template-columns: 1fr 6fr 1fr;
+        align-items: center;
+        gap: 10px;
+        border-bottom: solid 1px rgb(218, 218, 218);
+        padding: 10px 20px;
+      }
 
-	</script>
-</body>
+      check-list .temp-checkbox {
+        transform: translateX(-150px);
+        transition: all 500ms;
+      }
 
+      check-list .reveal-checkbox {
+        transform: translateX(0px);
+      }
+
+      .check-list .list-entry span {
+        cursor: pointer;
+        justify-self: center;
+      }
+
+      [type="checkbox"] {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: #00a7b5;
+        vertical-align: middle;
+        -webkit-appearance: none;
+        background: none;
+        border: 0;
+        outline: 0;
+        flex-grow: 0;
+        border-radius: 0.5rem;
+        transition: background 300ms;
+        cursor: pointer;
+      }
+
+      [type="checkbox"]::before {
+        content: "";
+        color: transparent;
+        display: block;
+        width: inherit;
+        height: inherit;
+        border-radius: inherit;
+        border: 0;
+        background-color: transparent;
+        background-size: contain;
+        box-shadow: inset 0 0 0 1px #ccd3d8;
+      }
+
+      [type="checkbox"]:checked {
+        background-color: currentcolor;
+      }
+
+      [type="checkbox"]:checked::before {
+        box-shadow: none;
+        color: white;
+        font-size: 1rem;
+        display: block;
+        width: 100%;
+        text-align: center;
+        content: "âœ“";
+      }
+
+      [type="checkbox"]:disabled {
+        background-color: #ccd3d8;
+        opacity: 0.84;
+        cursor: not-allowed;
+      }
+
+      check-list .list-data {
+        display: flex;
+      }
+
+      check-list .material-symbols-outlined:hover {
+        cursor: pointer;
+      }
+      check-list .input-container {
+        display: flex;
+        flex-direction: column;
+      }
+      check-list .input-box {
+        display: grid;
+        grid-template-columns: 1fr 6fr 1fr;
+
+        padding: 10px;
+        width: 100%;
+        border: none;
+        border-bottom: solid 1px rgb(218, 218, 218);
+        overflow: hidden;
+      }
+      check-list .input-box:focus-within {
+        border-bottom: 1px solid #00a7b5;
+      }
+
+      check-list .list-input {
+        border: none;
+        width: 100%;
+      }
+      check-list input:focus {
+        border: none;
+        outline: none;
+      }
+
+      profile-element {
+        margin-top: 110px;
+        margin-bottom: 50px;
+      }
+
+      profile-element .profile-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      profile-element .profile-pic {
+        border: solid 2px transparent;
+        border-radius: 100%;
+        background-color: white;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+      profile-element .profile-name {
+        text-transform: capitalize;
+      }
+
+      nav-list {
+        width: 90%;
+      }
+
+      nav-list .navlist {
+        width: 100%;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      nav-list .nav-entry {
+        padding: 20px 20px;
+        text-align: center;
+        border-radius: 10px;
+        text-transform: capitalize;
+      }
+
+      nav-list a {
+        text-decoration: none;
+      }
+      nav-list a:link,
+      nav-list a:visited {
+        color: black;
+        text-decoration: none;
+      }
+
+      nav-list a:hover {
+        cursor: pointer;
+        background-color: #fff;
+      }
+
+      nav-list .nav-add {
+        width: 100%;
+        border: dotted 1px #888;
+        border-radius: 10px;
+
+        background-color: transparent;
+        width: 100%;
+      }
+
+      nav-list .nav-add:hover {
+        cursor: pointer;
+        background-color: #fff;
+      }
+
+      nav-list .nav-add-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px 20px;
+      }
+
+      nav-list .active {
+        background-color: #e2e5e7;
+      }
+
+      nav-list .input-group {
+        display: flex;
+        justify-content: space-between;
+        border: solid 2px black;
+        border-radius: 10px;
+        background-color: white;
+        padding: 20px 20px;
+      }
+
+      nav-list .input-group:focus-within {
+        outline: 2px solid black;
+      }
+
+      nav-list .input-group button {
+        background-color: transparent;
+        border: none;
+      }
+
+      nav-list .input-group button:hover {
+        cursor: pointer;
+        color: green;
+      }
+
+      nav-list .input-group input {
+        border: none;
+      }
+      nav-list .input-group input:focus {
+        outline: none;
+      }
+
+      .strike {
+        text-decoration: line-through;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+    </style>
+    <style type="text/css" media="print">
+      * {
+        visibility: hidden;
+        margin: 0;
+        padding: 0;
+      }
+
+      .print-this * {
+        visibility: visible;
+      }
+
+      .print-this .add,
+      .print-this .print {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+
+  <script defer>
+    let OBSERVER_STATE = true;
+    class NavList extends HTMLElement {
+      _wrapper;
+      _observer;
+
+      render() {
+        this._wrapper.innerHTML = "";
+        const activeList = window.location.hash.slice(1);
+        const container = htmlToElement(`<nav class="navlist"></nav>`);
+        for (let list in veritabani) {
+          console.log(`active? ${list}===${activeList}`);
+
+          container.appendChild(
+            htmlToElement(
+              `<a href=#${list} class="nav-entry ${
+                activeList === list ? "active" : ""
+              }">${list}</div>`
+            )
+          );
+        }
+
+        // prevent observer from changing hash during smooth scrolling
+        container.addEventListener("click", this.disableObserver.bind(this));
+
+        const addButton = htmlToElement(
+          `<button class="nav-add">
+            <span class="nav-add-content">
+              <span class="material-symbols-outlined">add_circle</span>
+              <p>Yeni list</p>
+            </span>
+            </button>`
+        );
+
+        addButton.addEventListener("click", this.addList.bind(this));
+
+        this._wrapper.appendChild(container);
+        this._wrapper.appendChild(addButton);
+      }
+
+      disableObserver() {
+        OBSERVER_STATE = false;
+        console.log("observer disabled", OBSERVER_STATE);
+
+        const timer = setTimeout(() => {
+          this.render();
+          OBSERVER_STATE = true;
+          console.log("observer enabled", OBSERVER_STATE);
+        }, 600);
+      }
+
+      addList() {
+        const inputGroup = htmlToElement(`
+          <div class="input-group">
+
+          </div>`);
+        const input = inputGroup.appendChild(
+          htmlToElement(`
+        <input placeholder="Liste Adi Giriniz"></input>`)
+        );
+        const button = inputGroup.appendChild(
+          htmlToElement(`
+            <button>&#10004;</button>`)
+        );
+
+        button.addEventListener("click", () =>
+          this.addNewCheckList(input.value)
+        );
+        input.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            console.log(input.value);
+            this.addNewCheckList(input.value);
+          }
+        });
+        const addButton = document.querySelector(".nav-add");
+        console.log(this._wrapper);
+        this._wrapper.replaceChild(inputGroup, addButton);
+        input.focus();
+      }
+
+      addNewCheckList(baslik) {
+        veritabani[baslik] = {};
+        const checkListContainer = document.querySelector(".check-list");
+        const newCheckList = htmlToElement(`
+              <check-list
+                baslik="${baslik} Listem"
+                list="${baslik}"
+                placeholder="ï¿½ï¿½ Aï¿½ï¿½klamasï¿½..."
+              ></check-list>`);
+        checkListContainer.appendChild(newCheckList);
+        this._observer.observe(newCheckList);
+        this.disableObserver();
+        this.render();
+        newCheckList.scrollIntoView();
+        window.location.hash = baslik;
+      }
+
+      observe() {
+        let options = {
+          root: document.querySelector(".check-list"),
+          rootMargin: "0px",
+          threshold: 0.4,
+        };
+
+        let observer = new IntersectionObserver(
+          this.observerCallback.bind(this),
+          options
+        );
+        this._observer = observer;
+        const targets = document.querySelectorAll("check-list");
+        console.log("observer target:", targets);
+
+        for (let target of targets) {
+          observer.observe(target);
+        }
+      }
+
+      observerCallback(entries, observer) {
+        console.log("observer active?", OBSERVER_STATE);
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && OBSERVER_STATE) {
+            const targetListName = entry.target.getAttribute("list");
+            window.location.hash = targetListName;
+            this.render();
+          }
+        });
+      }
+
+      connectedCallback() {
+        console.log("hash", window.location.hash);
+        // wrapper for entire checklist element
+        const wrapper = this.appendChild(
+          htmlToElement(
+            `<span class="navlist-wrapper ${window.location.hash}"></span>`
+          )
+        );
+
+        this._wrapper = wrapper;
+
+        this.render();
+
+        setTimeout(() => {
+          this.observe();
+        }, 1);
+      }
+    }
+    // register component
+    customElements.define("nav-list", NavList);
+
+    // web component
+    class Checklist extends HTMLElement {
+      _wrapper;
+      _list;
+      _inputGroup = htmlToElement(
+        `<div class="input-container">
+    	</div>
+    	`
+      );
+
+      addToList() {
+        const inputBox = this._inputGroup.appendChild(
+          htmlToElement(`<div class="input-box"></div>`)
+        );
+
+        const checkBox = inputBox.appendChild(
+          htmlToElement(`
+        	<input class="temp-checkbox" type="checkbox" unchecked>
+        	`)
+        );
+
+        checkBox.addEventListener("click", this.saveInput.bind(this));
+
+        const input = inputBox.appendChild(
+          htmlToElement(
+            `<input class="list-input" placeholder="yaziniz"></input>`
+          )
+        );
+        input.addEventListener("input", (e) => {
+          if (
+            e.target.value &&
+            !checkBox.classList.contains("reveal-checkbox")
+          ) {
+            checkBox.classList.add("reveal-checkbox");
+          }
+          if (!e.target.value) {
+            checkBox.classList.remove("reveal-checkbox");
+          }
+        });
+        input.addEventListener("keydown", this.saveInput.bind(this));
+
+        const deleteButton = inputBox.appendChild(
+          htmlToElement(`
+     	 <span class="material-symbols-outlined">
+    		delete
+    	</span>`)
+        );
+
+        console.log("input group", deleteButton);
+
+        deleteButton.addEventListener("click", () =>
+          this.deleteInput(inputBox)
+        );
+        this._list.appendChild(inputBox);
+      }
+
+      checkChange(e, outerKey, innerKey) {
+        veritabani[outerKey][innerKey].secim =
+          !veritabani[outerKey][innerKey].secim;
+        this.render();
+      }
+
+      addCheckItem(event) {
+        this.addToList();
+        console.log("adding checklist item");
+      }
+
+      deleteInput(element) {
+        console.log("deleteing", element);
+        element.remove();
+      }
+
+      printCheckList() {
+        this.classList.add("print-this");
+        window.print();
+        this.classList.remove("print-this");
+        console.log("printing", this);
+      }
+
+      saveInput(e) {
+        const check = this.querySelector(".temp-checkbox").checked;
+        console.log("check", check);
+        const input = e.target.value.trim();
+        if (e.key === "Enter" && input) {
+          const key = this.getAttribute("list");
+          const keys = Object.entries(veritabani[key]);
+          if (keys.length === 0) {
+            // case empty checklist
+            // add input as first entry
+            veritabani[key] = { 0: { veri: input, secim: true } };
+            this.render();
+            return;
+          }
+          const innerKey = keys.pop()[0] + 1;
+          console.log("inner key", innerKey);
+          veritabani[key][innerKey] = { veri: input, secim: !check };
+          this.render();
+          console.log("saving", input);
+        }
+      }
+
+      render() {
+        const listTitle = this.getAttribute("list");
+
+        const target = this._list;
+        // refrence list so we can append to it when adding new items
+        console.log("target", target);
+        this._list = target;
+        if (Object.keys(veritabani[listTitle]).length) {
+          console.log("Rendering", veritabani[listTitle]);
+
+          target.innerHTML = "";
+        }
+
+        for (const [key, value] of Object.entries(veritabani[listTitle])) {
+          const listEntry = target.appendChild(
+            htmlToElement(`<div class="list-entry"></div>`)
+          );
+          const checkbox = listEntry.appendChild(
+            htmlToElement(`
+          	<label>
+        		<span class="checkmark"></span>
+        	</label>
+          `)
+          );
+
+          const checkboxInput = checkbox.appendChild(
+            value.secim
+              ? htmlToElement(`
+        	<input type="checkbox" unchecked>
+        	`)
+              : htmlToElement(`
+        	<input type="checkbox" checked="checked">
+        	`)
+          );
+          checkboxInput.addEventListener("click", (e) => {
+            this.checkChange(e, listTitle, key);
+          });
+
+          listEntry.appendChild(
+            htmlToElement(
+              `<li class="list-data ${value.secim ? "" : "strike"}">${
+                value.veri
+              }</li>`
+            )
+          );
+
+          const deleteListItem = listEntry.appendChild(
+            htmlToElement(`
+     	 <span class="material-symbols-outlined">
+    		delete
+    	</span>`)
+          );
+
+          deleteListItem.addEventListener("click", () =>
+            this.deleteListItem(key, value)
+          );
+        }
+      }
+
+      deleteListItem(key, value) {
+        delete veritabani[this.getAttribute("list")][key];
+        this.render();
+      }
+
+      // connect component
+      connectedCallback() {
+        // wrapper for entire checklist element
+        const wrapper = this.appendChild(
+          htmlToElement(
+            `<span id=${this.getAttribute("list")} class="wrapper"></span>`
+          )
+        );
+
+        this._wrapper = wrapper;
+
+        //   header section
+        const header = wrapper.appendChild(
+          htmlToElement(`<header class="header"></header>`)
+        );
+
+        //   title
+        const baslik = header.appendChild(
+          htmlToElement(`<p class="baslik"></p>`)
+        );
+        baslik.textContent = this.hasAttribute("baslik")
+          ? this.getAttribute("baslik")
+          : "default baslik";
+
+        // //   button group
+        const buttonGroup = header.appendChild(
+          htmlToElement(`<div class="button-group">
+        	</div>`)
+        );
+
+        //   add button
+        const addButton = buttonGroup.appendChild(
+          htmlToElement(`<button class="add">
+        		<span class="material-symbols-outlined">add_circle</span>
+        	</button>`)
+        );
+        addButton.addEventListener("click", (e) => this.addCheckItem());
+
+        //   print button
+        const printButton = buttonGroup.appendChild(
+          htmlToElement(`<button class="print">
+        		<span class="material-symbols-outlined">print</span>
+        	</button>`)
+        );
+        printButton.addEventListener("click", (e) => this.printCheckList());
+
+        const listTitle = this.getAttribute("list");
+        const list = htmlToElement(`<ul class="list"></ul>`);
+        this._list = list;
+
+        wrapper.appendChild(list);
+
+        this.render();
+      }
+    }
+    customElements.define("check-list", Checklist);
+
+    class ProfileElement extends HTMLElement {
+      constructor() {
+        super();
+      }
+      connectedCallback() {
+        const wrapper = this.appendChild(
+          htmlToElement(`<span class="profile-wrapper"></span>"`)
+        );
+        const profilePic = wrapper.appendChild(
+          htmlToElement(`
+          <div class="profile-pic">
+            <span class="material-symbols-outlined">
+              person
+            </span>
+          </div>`)
+        );
+
+        const profileName = wrapper.appendChild(
+          htmlToElement(
+            `<h3 class="profile-name">${this.getAttribute("name")}</h3>`
+          )
+        );
+      }
+    }
+
+    customElements.define("profile-element", ProfileElement);
+
+    function htmlToElement(html) {
+      var template = document.createElement("template");
+      html = html.trim(); // Never return a text node of whitespace as the result
+      template.innerHTML = html;
+      return template.content.firstChild;
+    }
+
+    let veritabani = {
+      yaplist: {
+        0: {
+          veri: "Tï¿½m proje tek html dosyasï¿½ iï¿½erisinde bitirilmelidir.",
+          secim: true,
+        },
+        1: {
+          veri: "Ek kï¿½tï¿½phane veya ï¿½erï¿½eve kullanï¿½lmadan js(ES6), css ve html kullanï¿½larak geliï¿½tirme yapï¿½lmalï¿½dï¿½r.",
+          secim: false,
+        },
+        2: {
+          veri: "Diï¿½er Detaylar ï¿½ï¿½in Lï¿½tfen README.md dosyasï¿½nï¿½ inceleyeniz.",
+          secim: true,
+        },
+      },
+      alisverislist: {
+        0: {
+          veri: "Sï¿½t",
+          secim: false,
+        },
+        1: {
+          veri: "Yoï¿½urt",
+          secim: true,
+        },
+        2: {
+          veri: "Ekmek",
+          secim: false,
+        },
+        3: {
+          veri: "1 Kg Soï¿½an",
+          secim: false,
+        },
+        4: {
+          veri: "3 Kg Patates",
+          secim: false,
+        },
+      },
+      digerlist: {
+        0: {
+          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 1",
+          secim: true,
+        },
+        1: {
+          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 2",
+          secim: false,
+        },
+        2: {
+          veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 3",
+          secim: false,
+        },
+      },
+    };
+  </script>
+
+  <body>
+    <div class="main-container">
+      <div class="nav-list">
+        <profile-element name="hasan aga"></profile-element>
+        <nav-list></nav-list>
+      </div>
+
+      <div class="check-list">
+        <check-list
+          baslik="Yapï¿½lacaklar"
+          list="yaplist"
+          placeholder="ï¿½ï¿½ Aï¿½ï¿½klamasï¿½..."
+        ></check-list>
+        <check-list
+          baslik="Alï¿½ï¿½veriï¿½ Listem"
+          list="alisverislist"
+          placeholder="ï¿½ï¿½ Aï¿½ï¿½klamasï¿½..."
+        ></check-list>
+        <check-list baslik="Diï¿½er ï¿½ï¿½lerim" list="digerlist"></check-list>
+      </div>
+    </div>
+  </body>
 </html>
