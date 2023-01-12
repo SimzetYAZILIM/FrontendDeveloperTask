@@ -108,7 +108,7 @@
 
       check-list .temp-checkbox {
         transform: translateX(-150px);
-        transition: all 200ms;
+        transition: all 500ms;
       }
 
       check-list .reveal-checkbox {
@@ -180,7 +180,9 @@
         flex-direction: column;
       }
       check-list .input-box {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 6fr 1fr;
+
         padding: 10px;
         width: 100%;
         border: none;
@@ -500,8 +502,6 @@
           htmlToElement(`<div class="input-box"></div>`)
         );
 
-        // todo: get status of checkbox when savingf
-
         const checkBox = inputBox.appendChild(
           htmlToElement(`
         	<input class="temp-checkbox" type="checkbox" unchecked>
@@ -521,6 +521,9 @@
             !checkBox.classList.contains("reveal-checkbox")
           ) {
             checkBox.classList.add("reveal-checkbox");
+          }
+          if (!e.target.value) {
+            checkBox.classList.remove("reveal-checkbox");
           }
         });
         input.addEventListener("keydown", this.saveInput.bind(this));
