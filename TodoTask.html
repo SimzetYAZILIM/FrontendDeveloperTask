@@ -41,7 +41,7 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        overflow: hidden;
+        overflow-y: scroll;
       }
       .check-list {
         scroll-padding-top: 100px;
@@ -171,7 +171,7 @@
 
       nav-list a:hover {
         cursor: pointer;
-        background-color: #888;
+        background-color: #fff;
       }
 
       nav-list .nav-add {
@@ -185,7 +185,7 @@
 
       nav-list .nav-add:hover {
         cursor: pointer;
-        background-color: #888;
+        background-color: #fff;
       }
 
       nav-list .nav-add-content {
@@ -193,6 +193,7 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
+        padding: 20px 20px;
       }
 
       nav-list .active {
@@ -202,8 +203,10 @@
       nav-list .input-group {
         display: flex;
         justify-content: space-between;
-        border: solid 1px black;
+        border: solid 2px black;
+        border-radius: 10px;
         background-color: white;
+        padding: 20px 20px;
       }
 
       nav-list .input-group:focus-within {
@@ -329,6 +332,7 @@
         const addButton = document.querySelector(".nav-add");
         console.log(this._wrapper);
         this._wrapper.replaceChild(inputGroup, addButton);
+        input.focus();
       }
 
       addNewCheckList(baslik) {
@@ -342,8 +346,11 @@
               ></check-list>`);
         checkListContainer.appendChild(newCheckList);
         this._observer.observe(newCheckList);
+        this.disableObserver();
         this.render();
         newCheckList.scrollIntoView();
+        window.location.hash = baslik;
+        this.render();
       }
 
       observe() {
