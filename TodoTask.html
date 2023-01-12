@@ -106,14 +106,23 @@
         padding: 10px 20px;
       }
 
+      check-list .temp-checkbox {
+        transform: translateX(-150px);
+        transition: all 200ms;
+      }
+
+      check-list .reveal-checkbox {
+        transform: translateX(0px);
+      }
+
       .check-list .list-entry span {
         cursor: pointer;
         justify-self: center;
       }
 
       [type="checkbox"] {
-        width: 2rem;
-        height: 2rem;
+        width: 1.5rem;
+        height: 1.5rem;
         color: #00a7b5;
         vertical-align: middle;
         -webkit-appearance: none;
@@ -121,7 +130,7 @@
         border: 0;
         outline: 0;
         flex-grow: 0;
-        border-radius: 9px;
+        border-radius: 0.5rem;
         transition: background 300ms;
         cursor: pointer;
       }
@@ -146,7 +155,9 @@
       [type="checkbox"]:checked::before {
         box-shadow: none;
         color: white;
-        font-size: 25px;
+        font-size: 1rem;
+        display: block;
+        width: 100%;
         text-align: center;
         content: "✓";
       }
@@ -174,6 +185,7 @@
         width: 100%;
         border: none;
         border-bottom: solid 1px rgb(218, 218, 218);
+        overflow: hidden;
       }
       check-list .input-box:focus-within {
         border-bottom: 1px solid #00a7b5;
@@ -487,11 +499,30 @@
         const inputBox = this._inputGroup.appendChild(
           htmlToElement(`<div class="input-box"></div>`)
         );
+
+        // todo: get status of checkbox when savingf
+
+        const checkBox = inputBox.appendChild(
+          htmlToElement(`
+        	<input class="temp-checkbox" type="checkbox" unchecked>
+        	`)
+        );
+
+        checkBox.addEventListener("click", this.saveInput.bind(this));
+
         const input = inputBox.appendChild(
           htmlToElement(
             `<input class="list-input" placeholder="yaziniz"></input>`
           )
         );
+        input.addEventListener("input", (e) => {
+          if (
+            e.target.value &&
+            !checkBox.classList.contains("reveal-checkbox")
+          ) {
+            checkBox.classList.add("reveal-checkbox");
+          }
+        });
         input.addEventListener("keydown", this.saveInput.bind(this));
 
         const deleteButton = inputBox.appendChild(
@@ -533,6 +564,8 @@
       }
 
       saveInput(e) {
+        const check = this.querySelector(".temp-checkbox").checked;
+        console.log("check", check);
         const input = e.target.value.trim();
         if (e.key === "Enter" && input) {
           const key = this.getAttribute("list");
@@ -546,7 +579,7 @@
           }
           const innerKey = keys.pop()[0] + 1;
           console.log("inner key", innerKey);
-          veritabani[key][innerKey] = { veri: input, secim: true };
+          veritabani[key][innerKey] = { veri: input, secim: !check };
           this.render();
           console.log("saving", input);
         }
