@@ -19,21 +19,24 @@
       * {
         font-family: Inter, Arial, sans-serif;
         scroll-behavior: smooth;
+        margin: 0;
+        padding: 0;
       }
       html {
         overflow: hidden;
+        padding: 0;
       }
+
       .main-container {
         width: 100%;
         height: 100vh;
-        background-color: red;
         display: flex;
       }
 
       .nav-list {
+        background-color: #f8f8f8;
         flex-grow: 1;
         flex-shrink: 6;
-        background-color: orangered;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -45,7 +48,7 @@
 
         flex-grow: 3;
         flex-shrink: 1;
-        background-color: yellow;
+        background-color: #ffffff;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -137,7 +140,6 @@
       }
 
       nav-list {
-        background-color: antiquewhite;
         width: 90%;
       }
 
@@ -242,6 +244,7 @@
   <script defer>
     class NavList extends HTMLElement {
       _wrapper;
+      _observer;
 
       render() {
         this._wrapper.innerHTML = "";
@@ -312,7 +315,7 @@
                 placeholder="�� A��klamas�..."
               ></check-list>`);
         checkListContainer.appendChild(newCheckList);
-
+        this._observer.observe(newCheckList);
         this.render();
         newCheckList.scrollIntoView();
       }
@@ -321,13 +324,14 @@
         let options = {
           root: document.querySelector(".check-list"),
           rootMargin: "0px",
-          threshold: 0.1,
+          threshold: 0.4,
         };
 
         let observer = new IntersectionObserver(
           this.observerCallback.bind(this),
           options
         );
+        this._observer = observer;
         const targets = document.querySelectorAll("check-list");
         console.log("observer target:", targets);
 
@@ -642,18 +646,6 @@
   </script>
 
   <body>
-    <!--
-
-		CheckList Custom Elementi �zellikleri
-		-Olu�acak sat�rlar�n verisi veritaban� objesinden al�nacakt�r.
-		-Placeholder attribute de�eri yeni eklenen sat�rlardaki inputun placeholder de�erine atacakt�r.Placeholder attribute verilmeyen checklist elementlerinde varsay�lan de�er "Yaz�n�z..." olacakt�r.
-		-Basl�k attribute de�eri checklistin i�erisinde olu�acak <baslik></baslik> tag�na yerle�tirilecektir.
-		-Basl�kta yer alan yazd�r butonuna bas�ld���nda sadece o checklist elementinin dolu sat�rlar� g�z�kecektir.(Bo� sat�rlar gizli olmal�d�r.)
-		-Eklenen sat�rlarda input value de�eri null ise solunda yer alan checkbox gizli olmal�d�r.
-		-Yap�ld� i�aretlenen sat�rlarda text alan�n�n �st� �izili olmald�r.
-		-Yap�ld� i�aretlenen sat�rlarda text alan�nda i�aret kald�r�lana kadar de�i�iklik engellenmelidir.
-		-Sat�rlar�n sa��nda yer alan sil iconuna t�kland���nda sat�r silinmelidir.
-	-->
     <div class="main-container">
       <div class="nav-list">
         <profile-element name="hasan aga"></profile-element>
@@ -673,14 +665,6 @@
         ></check-list>
         <check-list baslik="Di�er ��lerim" list="digerlist"></check-list>
       </div>
-      <!--
-			NavList Custom Elementi �zellikleri
-			- Sat�rlar html dosyas�nda yer alan veritaban� objesindeki kay�tlara g�re otomatik olu�acakt�r.
-			- Sat�rlar�n innerHTML verisi o an domdaki list attribute ile e�le�en checklistten alacakt�r.
-			- Scroll konumuna g�re ekranda g�z�ken checklistin navlist kar��l��� background style anl�k olarak de�i�melidir.
-			- "Yeni Liste" butonuna bas�ld���nda g�z�kecek inputa yaz�lacak de�erle ayn� ba�l�k de�erine sahip checklist elementi inputun sa��nda yer alan butona bas�ld���nda anda olu�turmal� ve scroll olu�an liste g�z�kecek �ekilde kaymal�d�r.
-
-			-->
     </div>
   </body>
 </html>
