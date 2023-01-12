@@ -35,7 +35,7 @@
 
       .nav-list {
         background-color: #f8f8f8;
-        flex-grow: 1;
+        flex-grow: 1.5;
         flex-shrink: 6;
         display: flex;
         flex-direction: column;
@@ -132,8 +132,9 @@
       profile-element .profile-pic {
         border: solid 2px transparent;
         border-radius: 100%;
-        background-color: aliceblue;
+        background-color: white;
         padding: 10px;
+        margin-bottom: 20px;
       }
       profile-element .profile-name {
         text-transform: capitalize;
@@ -153,9 +154,19 @@
       }
 
       nav-list .nav-entry {
-        padding: 10px 20px;
+        padding: 20px 20px;
         text-align: center;
         border-radius: 10px;
+        text-transform: capitalize;
+      }
+
+      nav-list a {
+        text-decoration: none;
+      }
+      nav-list a:link,
+      nav-list a:visited {
+        color: black;
+        text-decoration: none;
       }
 
       nav-list a:hover {
@@ -185,7 +196,7 @@
       }
 
       nav-list .active {
-        background-color: green;
+        background-color: #e2e5e7;
       }
 
       nav-list .input-group {
@@ -242,6 +253,7 @@
   </head>
 
   <script defer>
+    let OBSERVER_STATE = true;
     class NavList extends HTMLElement {
       _wrapper;
       _observer;
@@ -252,7 +264,7 @@
         const container = htmlToElement(`<nav class="navlist"></nav>`);
         for (let list in veritabani) {
           console.log(`active? ${list}===${activeList}`);
-          console.log();
+
           container.appendChild(
             htmlToElement(
               `<a href=#${list} class="nav-entry ${
@@ -261,6 +273,9 @@
             )
           );
         }
+
+        // prevent observer from changing hash during smooth scrolling
+        container.addEventListener("click", this.disableObserver.bind(this));
 
         const addButton = htmlToElement(
           `<button class="nav-add">
@@ -275,6 +290,17 @@
 
         this._wrapper.appendChild(container);
         this._wrapper.appendChild(addButton);
+      }
+
+      disableObserver() {
+        OBSERVER_STATE = false;
+        console.log("observer disabled", OBSERVER_STATE);
+
+        const timer = setTimeout(() => {
+          this.render();
+          OBSERVER_STATE = true;
+          console.log("observer enabled", OBSERVER_STATE);
+        }, 600);
       }
 
       addList() {
@@ -341,10 +367,10 @@
       }
 
       observerCallback(entries, observer) {
+        console.log("observer active?", OBSERVER_STATE);
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && OBSERVER_STATE) {
             const targetListName = entry.target.getAttribute("list");
-            console.log(entry, targetListName);
             window.location.hash = targetListName;
             this.render();
           }
@@ -352,8 +378,6 @@
       }
 
       connectedCallback() {
-        // todo: put intersection observer here
-        // whenever url intersection happens call render
         console.log("hash", window.location.hash);
         // wrapper for entire checklist element
         const wrapper = this.appendChild(
@@ -368,7 +392,7 @@
 
         setTimeout(() => {
           this.observe();
-        }, 200);
+        }, 1);
       }
     }
     // register component
