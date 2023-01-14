@@ -1,0 +1,44 @@
+
+@media print {
+    .noPrint{
+        display:none;
+      }
+    }
+    
+    
+    @media only screen and   (max-width: 800px) {
+        .navBar{
+            display: none;
+            width: 60%;
+        }
+        .menuIcon{
+            display: block;
+        }
+        .userName{
+            font-size: 15px;
+        }
+    }
+    
+    @media only screen and  (max-width: 600px) {
+        .checkList{
+            width: 80%;
+        }
+        .menuIcon{
+            left: 8%;
+        }
+        .navBar{
+            width: 50%;
+        }
+        .userName{
+            font-size: 20px;
+        }
+    }
+    
+    @media only screen and  (max-width: 300px) {
+        .checkList{
+            width: 100%;
+        }
+        .menuIcon{
+            left: 0;
+        }
+    }

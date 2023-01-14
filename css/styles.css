@@ -1,0 +1,15 @@
+:root {
+    --iconfont: 'Material Symbols Outlined';
+    /* https://fonts.google.com/icons */
+}
+
+* {
+    font-family: Inter, Arial, sans-serif;
+}
+body{
+    display: flex;
+    margin: 0;
+}
+
+
+
