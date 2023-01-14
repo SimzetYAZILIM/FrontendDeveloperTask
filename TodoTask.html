@@ -1,107 +1,37 @@
 <html>
-
 <head>
 	<title>Task App</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<link rel="stylesheet" href="css/styles.css" />
+	<link rel="stylesheet" href="css/navbar.css" />
+	<link rel="stylesheet" href="css/mainbody.css" />
+	<link rel="stylesheet" href="css/media.css" />
 </head>
 
 <body>
-	<style>
-		:root {
-			--iconfont: 'Material Symbols Outlined';
-			/* https://fonts.google.com/icons */
-		}
-
-		* {
-			font-family: Inter, Arial, sans-serif;
-		}
-	</style>
-
-	<!--
-
-		CheckList Custom Elementi Özellikleri
-		-Oluþacak satýrlarýn verisi veritabaný objesinden alýnacaktýr.
-		-Placeholder attribute deðeri yeni eklenen satýrlardaki inputun placeholder deðerine atacaktýr.Placeholder attribute verilmeyen checklist elementlerinde varsayýlan deðer "Yazýnýz..." olacaktýr.
-		-Baslýk attribute deðeri checklistin içerisinde oluþacak <baslik></baslik> tagýna yerleþtirilecektir.
-		-Baslýkta yer alan yazdýr butonuna basýldýðýnda sadece o checklist elementinin dolu satýrlarý gözükecektir.(Boþ satýrlar gizli olmalýdýr.)
-		-Eklenen satýrlarda input value deðeri null ise solunda yer alan checkbox gizli olmalýdýr.
-		-Yapýldý iþaretlenen satýrlarda text alanýnýn üstü çizili olmaldýr.
-		-Yapýldý iþaretlenen satýrlarda text alanýnda iþaret kaldýrýlana kadar deðiþiklik engellenmelidir.
-		-Satýrlarýn saðýnda yer alan sil iconuna týklandýðýnda satýr silinmelidir.
-	-->
-
-
-	<check-list baslik="Yapýlacaklar" list="yaplist" placeholder="Ýþ Açýklamasý..."></check-list>
-	<check-list baslik="Alýþveriþ Listem" list="alisverislist" placeholder="Ýþ Açýklamasý..."></check-list>
-	<check-list baslik="Diðer Ýþlerim" list="digerlist"></check-list>
-
-	<!--
-			NavList Custom Elementi Özellikleri
-			- Satýrlar html dosyasýnda yer alan veritabaný objesindeki kayýtlara göre otomatik oluþacaktýr.
-			- Satýrlarýn innerHTML verisi o an domdaki list attribute ile eþleþen checklistten alacaktýr.
-			- Scroll konumuna göre ekranda gözüken checklistin navlist karþýlýðý background style anlýk olarak deðiþmelidir.
-			- "Yeni Liste" butonuna basýldýðýnda gözükecek inputa yazýlacak deðerle ayný baþlýk deðerine sahip checklist elementi inputun saðýnda yer alan butona basýldýðýnda anda oluþturmalý ve scroll oluþan liste gözükecek þekilde kaymalýdýr.
-
-			-->
-	<nav-list></nav-list>
-
-	<script>
-		let veritabani = {
-			yaplist: {
-				0: {
-					veri: "Tüm proje tek html dosyasý içerisinde bitirilmelidir.",
-					secim: true
-				},
-				1: {
-					veri: "Ek kütüphane veya çerçeve kullanýlmadan js(ES6), css ve html kullanýlarak geliþtirme yapýlmalýdýr.",
-					secim: false
-				},
-				2: {
-					veri: "Diðer Detaylar Ýçin Lütfen README.md dosyasýný inceleyeniz.",
-					secim: true
-				}
-			},
-			alisverislist: {
-				0: {
-					veri: "Süt",
-					secim: false
-				},
-				1: {
-					veri: "Yoðurt",
-					secim: true
-				},
-				2: {
-					veri: "Ekmek",
-					secim: false
-				},
-				3: {
-					veri: "1 Kg Soðan",
-					secim: false
-				},
-				4: {
-					veri: "3 Kg Patates",
-					secim: false
-				}
-			},
-			digerlist: {
-				0: {
-					veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 1",
-					secim: true
-				},
-				1: {
-					veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 2",
-					secim: false
-				},
-				2: {
-					veri: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 3",
-					secim: false
-				}
-			}
-		}
-
-	</script>
+	<nav-list class="navBar noPrint">
+		<div class="profilePhoto">
+			<img src="assets/profile-icon.png" width="20px" height="20px">
+		</div>
+		<label class="userName"><b>Onur Durkal</b></label>
+		<ul id="allList">
+			<li class="addNewList" >
+				<img style=" margin-right:14px" src="assets/add_icon.png" height="24" width="24"> 
+				<input onclick="onClickAddList(this)"  type="text" placeholder="Yeni Liste" class="addListInput">
+				<div onclick="onClickCheck(this)" style="height:100%; display: flex; align-items: center;">
+					<img  id="checkIcon" src="assets/check-icon-inactive.png" height="12" width="12" style="display: none;">
+				</div>
+			</li>
+		</ul>
+	</nav-list>
+	<div id="main" class="mainPage">
+		<div onclick="menuClick(this)" class="menuIcon"><img src="assets/menu.png" width="20px" height="20px"></div>
+	</div>
+	<script src="js/veritabani.js"></script>
+	<script src="js/createListElement.js"></script>
+	<script src="js/events.js"></script>
 </body>
-
 </html>
