@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 	<title>Task App</title>
@@ -17,59 +18,415 @@
 		* {
 			font-family: Inter, Arial, sans-serif;
 		}
+
+		.main {
+		margin-left: 160px; /* Same as the width of the sidenav */
+		font-size: 28px; /* Increased text to enable scrolling */
+		padding: 0px 10px;
+		}
+
+		section {
+			width: 100%;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		
+		.container {
+			display: flex;
+			align-items: center;	
+		}
+
+		.yeni-liste-input {
+			display: flex;
+			border: none;
+			border-bottom: 1px solid #000;
+			outline: none;
+			font-size: 1.5rem;
+			padding: 0.5rem;
+			margin: 0.5rem;
+			width: 40%;
+		}
+
+		.yeni-liste-input:focus {
+			border-bottom: 1px solid rgb(4, 255, 0);
+		}
+
+		h2 {
+			margin-right: 5rem;
+		}
+
+		a {
+			text-decoration: none;
+		}
+		
+	.sidenav {
+	height: 100%;
+	width: 200px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: rgb(240, 240, 240);
+	overflow-x: hidden;
+	padding-top: 5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	}
+
+	.sidenav button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	font-size: 1rem;
+	background-color: rgb(240, 240, 240);
+	border: none;
+	border-radius: 1rem;
+	width: 100%;
+	}
+
+	button:hover {
+	background-color: rgb(210, 210, 210);
+	cursor: pointer;
+	}
+
+	button.active {
+	background-color: rgb(210, 210, 210);
+	border-radius: 1rem;
+	transition: 0.5s;
+	}
+
+	span {
+		z-index: 9999;
+	}
+
+	span:hover {
+		cursor: pointer;
+	}
+
+	input.sidenav-button {
+		display: flex;
+		border: none;
+		outline: none;
+		font-size: 1rem;
+		padding: 0.5rem;
+		margin: 0.5rem;
+		width: 80%;
+	}
+
+
+	.material-symbols-outlined.yeni-liste {
+	padding-right: 0.5rem;
+	}
+
+
+	@media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav button {font-size: 1rem;}
+	}
+
+
 	</style>
 
 	<!--
 
-		CheckList Custom Elementi Özellikleri
-		-Oluþacak satýrlarýn verisi veritabaný objesinden alýnacaktýr.
-		-Placeholder attribute deðeri yeni eklenen satýrlardaki inputun placeholder deðerine atacaktýr.Placeholder attribute verilmeyen checklist elementlerinde varsayýlan deðer "Yazýnýz..." olacaktýr.
-		-Baslýk attribute deðeri checklistin içerisinde oluþacak <baslik></baslik> tagýna yerleþtirilecektir.
-		-Baslýkta yer alan yazdýr butonuna basýldýðýnda sadece o checklist elementinin dolu satýrlarý gözükecektir.(Boþ satýrlar gizli olmalýdýr.)
-		-Eklenen satýrlarda input value deðeri null ise solunda yer alan checkbox gizli olmalýdýr.
-		-Yapýldý iþaretlenen satýrlarda text alanýnýn üstü çizili olmaldýr.
-		-Yapýldý iþaretlenen satýrlarda text alanýnda iþaret kaldýrýlana kadar deðiþiklik engellenmelidir.
-		-Satýrlarýn saðýnda yer alan sil iconuna týklandýðýnda satýr silinmelidir.
+		CheckList Custom Elementi ï¿½zellikleri
+		-Oluï¿½acak satï¿½rlarï¿½n verisi veritabanï¿½ objesinden alï¿½nacaktï¿½r.
+		-Placeholder attribute deï¿½eri yeni eklenen satï¿½rlardaki inputun placeholder deï¿½erine atacaktï¿½r.Placeholder attribute verilmeyen checklist elementlerinde varsayï¿½lan deï¿½er "Yazï¿½nï¿½z..." olacaktï¿½r.
+		-Baslï¿½k attribute deï¿½eri checklistin iï¿½erisinde oluï¿½acak <baslik></baslik> tagï¿½na yerleï¿½tirilecektir.
+		-Baslï¿½kta yer alan yazdï¿½r butonuna basï¿½ldï¿½ï¿½ï¿½nda sadece o checklist elementinin dolu satï¿½rlarï¿½ gï¿½zï¿½kecektir.(Boï¿½ satï¿½rlar gizli olmalï¿½dï¿½r.)
+		-Eklenen satï¿½rlarda input value deï¿½eri null ise solunda yer alan checkbox gizli olmalï¿½dï¿½r.
+		-Yapï¿½ldï¿½ iï¿½aretlenen satï¿½rlarda text alanï¿½nï¿½n ï¿½stï¿½ ï¿½izili olmaldï¿½r.
+		-Yapï¿½ldï¿½ iï¿½aretlenen satï¿½rlarda text alanï¿½nda iï¿½aret kaldï¿½rï¿½lana kadar deï¿½iï¿½iklik engellenmelidir.
+		-Satï¿½rlarï¿½n saï¿½ï¿½nda yer alan sil iconuna tï¿½klandï¿½ï¿½ï¿½nda satï¿½r silinmelidir.
 	-->
 
-
-	<check-list baslik="Yapýlacaklar" list="yaplist" placeholder="Ýþ Açýklamasý..."></check-list>
-	<check-list baslik="Alýþveriþ Listem" list="alisverislist" placeholder="Ýþ Açýklamasý..."></check-list>
-	<check-list baslik="Diðer Ýþlerim" list="digerlist"></check-list>
+<!-- 	
+	<check-list baslik="Yapï¿½lacaklar" list="yaplist" placeholder="ï¿½ï¿½ Aï¿½ï¿½klamasï¿½..."></check-list>
+	<check-list baslik="Alï¿½ï¿½veriï¿½ Listem" list="alisverislist" placeholder="ï¿½ï¿½ Aï¿½ï¿½klamasï¿½..."></check-list>
+	<check-list baslik="Diï¿½er ï¿½ï¿½lerim" list="digerlist"></check-list> 
+-->
 
 	<!--
-			NavList Custom Elementi Özellikleri
-			- Satýrlar html dosyasýnda yer alan veritabaný objesindeki kayýtlara göre otomatik oluþacaktýr.
-			- Satýrlarýn innerHTML verisi o an domdaki list attribute ile eþleþen checklistten alacaktýr.
-			- Scroll konumuna göre ekranda gözüken checklistin navlist karþýlýðý background style anlýk olarak deðiþmelidir.
-			- "Yeni Liste" butonuna basýldýðýnda gözükecek inputa yazýlacak deðerle ayný baþlýk deðerine sahip checklist elementi inputun saðýnda yer alan butona basýldýðýnda anda oluþturmalý ve scroll oluþan liste gözükecek þekilde kaymalýdýr.
+			NavList Custom Elementi ï¿½zellikleri
+			- Satï¿½rlar html dosyasï¿½nda yer alan veritabanï¿½ objesindeki kayï¿½tlara gï¿½re otomatik oluï¿½acaktï¿½r.
+			- Satï¿½rlarï¿½n innerHTML verisi o an domdaki list attribute ile eï¿½leï¿½en checklistten alacaktï¿½r.
+			- Scroll konumuna gï¿½re ekranda gï¿½zï¿½ken checklistin navlist karï¿½ï¿½lï¿½ï¿½ï¿½ background style anlï¿½k olarak deï¿½iï¿½melidir.
+			- "Yeni Liste" butonuna basï¿½ldï¿½ï¿½ï¿½nda gï¿½zï¿½kecek inputa yazï¿½lacak deï¿½erle aynï¿½ baï¿½lï¿½k deï¿½erine sahip checklist elementi inputun saï¿½ï¿½nda yer alan butona basï¿½ldï¿½ï¿½ï¿½nda anda oluï¿½turmalï¿½ ve scroll oluï¿½an liste gï¿½zï¿½kecek ï¿½ekilde kaymalï¿½dï¿½r.
 
 			-->
-	<nav-list></nav-list>
+	<!-- <nav-list></nav-list> -->
+
+
+<div class="main">
+	<section class="yapilacaklar" id="yapilacaklar">
+		<div class="container" id="container">
+			<h2>YapÄ±lacaklar</h2>
+			<span class="material-symbols-outlined yeni-liste">add_circle</span>
+			<span class="material-symbols-outlined yazdir" id="yazdir">print</span>
+		</div>
+	</section>
+
+	<section class="alisveris-listem" id="alisveris-listem">
+		<div class="container" id="container">
+			<h2>AlÄ±ÅŸveriÅŸ Listem</h2>
+			<span class="material-symbols-outlined yeni-liste">add_circle</span>
+			<span class="material-symbols-outlined yazdir" id="yazdir">print</span>
+		</div>
+	</section>
+
+	<section class="diger-islerim" id="diger-islerim">
+		<div class="container" id="container">
+			<h2>DiÄŸer Ä°ÅŸlerim</h2>
+			<span class="material-symbols-outlined yeni-liste">add_circle</span>
+			<span class="material-symbols-outlined yazdir" id="yazdir">print</span>
+		</div>
+	</section>
+</div>
+
+<div class="sidenav">
+	<span class="material-symbols-outlined">person</span>
+	<h3>Ahmet YÄ±lmaz</h3>
+	<a href="#yapilacaklar" ><button >YapÄ±lacaklar</button></a>
+	<a href="#alisveris-listem" ><button >AlÄ±ÅŸveriÅŸ Listem</button></a>
+	<a href="#diger-islerim" ><button >DiÄŸer Ä°ÅŸlerim</button></a>
+	<button id="yeniliste">
+		<span class="material-symbols-outlined yeni-liste" >add_circle</span>
+		Yeni Liste
+	</button>
+</div>
 
 	<script>
+
+		// create yapilacaklar
+		const yapilacaklar = document.querySelector('#yapilacaklar');
+		const alisverisListem = document.querySelector('#alisveris-listem');
+		const digerIslerim = document.querySelector('#diger-islerim');
+		const yeniListe = document.querySelector('#yeniliste');
+
+ 		yapilacaklar.addEventListener('click', function (e) {
+			if (e.target.classList.contains('yeni-liste')) {
+				const input = document.createElement('input');
+				input.setAttribute('type', 'text');
+				input.setAttribute('placeholder', 'YazÄ±nÄ±z...');
+				input.classList.add('yeni-liste-input');
+				
+				yapilacaklar.appendChild(input);
+				input.focus();
+
+				input.addEventListener('keyup', function (e) {
+					if (e.key === 'Enter') {
+						const div = document.createElement('div');
+						div.classList.add('yeni-liste-div');
+
+						const check = document.createElement('span');
+						check.classList.add('material-symbols-outlined');
+						check.classList.add('yeni-liste-check');
+						check.textContent = 'priority'
+
+						const checkbox = document.createElement('input');
+						checkbox.setAttribute('type', 'checkbox');
+						checkbox.classList.add('yeni-liste-checkbox');
+
+						const span = document.createElement('span');
+						span.classList.add('yeni-liste-span');
+						span.textContent = input.value;
+						
+						const sil = document.createElement('span');
+						sil.classList.add('material-symbols-outlined');
+						sil.classList.add('yeni-liste-sil');
+						sil.textContent = 'delete';
+
+						div.appendChild(check);
+						div.appendChild(checkbox);
+						div.appendChild(span);
+						div.appendChild(sil);
+						yapilacaklar.appendChild(div);
+						input.remove();
+					}
+				});
+			}
+		});  
+
+
+		alisverisListem.addEventListener('click', function (e) {
+			if (e.target.classList.contains('yeni-liste')) {
+				const input = document.createElement('input');
+				input.setAttribute('type', 'text');
+				input.setAttribute('placeholder', 'YazÄ±nÄ±z...');
+				input.classList.add('yeni-liste-input');
+				alisverisListem.appendChild(input);
+				input.focus();
+
+				input.addEventListener('keyup', function (e) {
+					if (e.key === 'Enter') {
+						const div = document.createElement('div');
+						div.classList.add('yeni-liste-div');
+
+						const check = document.createElement('span');
+						check.classList.add('material-symbols-outlined');
+						check.classList.add('yeni-liste-check');
+						check.textContent = 'priority'
+
+						const checkbox = document.createElement('input');
+						checkbox.setAttribute('type', 'checkbox');
+						checkbox.classList.add('yeni-liste-checkbox');
+
+						const span = document.createElement('span');
+						span.classList.add('yeni-liste-span');
+						span.textContent = input.value;
+
+						const sil = document.createElement('span');
+						sil.classList.add('material-symbols-outlined');
+						sil.classList.add('yeni-liste-sil');
+						sil.textContent = 'delete';
+
+						div.appendChild(check);
+						div.appendChild(checkbox);
+						div.appendChild(span);
+						div.appendChild(sil);
+						alisverisListem.appendChild(div);
+						input.remove();
+					}
+				});
+			}
+		});
+
+
+		digerIslerim.addEventListener('click', function (e) {
+			if (e.target.classList.contains('yeni-liste')) {
+				const input = document.createElement('input');
+				input.setAttribute('type', 'text');
+				input.setAttribute('placeholder', 'YazÄ±nÄ±z...');
+				input.classList.add('yeni-liste-input');
+				digerIslerim.appendChild(input);
+				input.focus();
+
+				input.addEventListener('keyup', function (e) {
+					if (e.key === 'Enter') {
+						const div = document.createElement('div');
+						div.classList.add('yeni-liste-div');
+
+						const check = document.createElement('span');
+						check.classList.add('material-symbols-outlined');
+						check.classList.add('yeni-liste-check');
+						check.textContent = 'priority';
+
+						const checkbox = document.createElement('input');
+						checkbox.setAttribute('type', 'checkbox');
+						checkbox.classList.add('yeni-liste-checkbox');
+
+						const span = document.createElement('span');
+						span.classList.add('yeni-liste-span');
+						span.textContent = input.value;
+
+						const sil = document.createElement('span');
+						sil.classList.add('material-symbols-outlined');
+						sil.classList.add('yeni-liste-sil');
+						sil.textContent = 'delete';
+
+						div.appendChild(check);
+						div.appendChild(checkbox);
+						div.appendChild(span);
+						div.appendChild(sil);
+						digerIslerim.appendChild(div);
+						input.remove();
+					}
+				});
+			}
+		});
+
+
+			// create yeniListe
+			yeniListe.addEventListener('click', function () {
+			const section = document.createElement('section');
+			section.classList.add('yeni-liste-section');
+			section.setAttribute('id', 'yeni-liste-section');
+
+			const div = document.createElement('div');
+			div.classList.add('container');
+			div.setAttribute('id', 'container');
+
+			const h2 = document.createElement('h2');
+			h2.textContent = 'test';
+
+			const addSpan = document.createElement('span');
+			addSpan.classList.add('material-symbols-outlined');
+			addSpan.classList.add('yeni-liste');
+			addSpan.setAttribute('id', 'test');
+			addSpan.textContent = 'add_circle';
+
+			const printButton = document.createElement('span');
+			printButton.classList.add('material-symbols-outlined');
+			printButton.classList.add('yazdir');
+			printButton.textContent = 'print';
+
+			const newButton = document.createElement('input');
+			newButton.setAttribute('type', 'text');
+			newButton.setAttribute('placeholder', 'YazÄ±nÄ±z...');
+			newButton.classList.add('sidenav-button');
+			
+
+			document.querySelector('.sidenav').appendChild(newButton);
+
+			div.appendChild(h2);
+			div.appendChild(addSpan);
+			div.appendChild(printButton);
+			section.appendChild(div);
+			document.querySelector('.main').appendChild(section);
+		});
+		
+
+		const sections = document.querySelectorAll('section');
+		const buttonList = document.querySelectorAll('button');
+
+		window.onscroll = function () {
+			const scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+
+			for (let i = 0; i < sections.length; i++) {
+				if (sections[i].offsetTop - 1 <= scrollPosition) {
+					buttonList.forEach((btn) => {
+						btn.classList.remove('active');
+					});
+					buttonList[i].classList.add('active');
+				}
+			}
+		};
+
+
+		const printSpan = document.getElementsByClassName('material-symbols-outlined yazdir');
+		for (let i = 0; i < printSpan.length; i++) {
+			printSpan[i].addEventListener('click', function () {
+				window.print();
+			});
+		}
+
+
 		let veritabani = {
 			yaplist: {
 				0: {
-					veri: "Tüm proje tek html dosyasý içerisinde bitirilmelidir.",
+					veri: "Tï¿½m proje tek html dosyasï¿½ iï¿½erisinde bitirilmelidir.",
 					secim: true
 				},
 				1: {
-					veri: "Ek kütüphane veya çerçeve kullanýlmadan js(ES6), css ve html kullanýlarak geliþtirme yapýlmalýdýr.",
+					veri: "Ek kï¿½tï¿½phane veya ï¿½erï¿½eve kullanï¿½lmadan js(ES6), css ve html kullanï¿½larak geliï¿½tirme yapï¿½lmalï¿½dï¿½r.",
 					secim: false
 				},
 				2: {
-					veri: "Diðer Detaylar Ýçin Lütfen README.md dosyasýný inceleyeniz.",
+					veri: "Diï¿½er Detaylar ï¿½ï¿½in Lï¿½tfen README.md dosyasï¿½nï¿½ inceleyeniz.",
 					secim: true
 				}
 			},
 			alisverislist: {
 				0: {
-					veri: "Süt",
+					veri: "Sï¿½t",
 					secim: false
 				},
 				1: {
-					veri: "Yoðurt",
+					veri: "Yoï¿½urt",
 					secim: true
 				},
 				2: {
@@ -77,7 +434,7 @@
 					secim: false
 				},
 				3: {
-					veri: "1 Kg Soðan",
+					veri: "1 Kg Soï¿½an",
 					secim: false
 				},
 				4: {
